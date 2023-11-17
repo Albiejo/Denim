@@ -1,0 +1,977 @@
+<%-include(".././../Layouts/userheader.ejs")%>
+
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/loginhomepage" rel="nofollow">Home</a>
+                    <span></span> Pages
+                    <span></span> Account
+                </div>
+            </div>
+        </div>
+        
+                <section class="pt-150 pb-150">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 m-auto">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="dashboard-menu">
+                                            <ul class="nav flex-column" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab"
+                                                        href="#dashboard" role="tab" aria-controls="dashboard"
+                                                        aria-selected="false"><i
+                                                            class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                        href="/myOrders" role="tab" aria-controls="orders"
+                                                        aria-selected="false"><i
+                                                            class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                                </li>
+
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="address-tab" data-bs-toggle="tab"
+                                                        href="#address" role="tab" aria-controls="address"
+                                                        aria-selected="true"><i class="fi-rs-marker mr-10"></i>My
+                                                        Address</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
+                                                        href="#account-detail" role="tab" aria-controls="account-detail"
+                                                        aria-selected="true"><i class="fi-rs-user mr-10"></i>Edit
+                                                        Profile</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="password-change-tab" data-bs-toggle="tab"
+                                                        href="#password-change" role="tab"
+                                                        aria-controls="account-detail" aria-selected="true"><i
+                                                            class="fi-rs-edit mr-10"></i>Change Password</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="Add-new-address-tab" data-bs-toggle="tab"
+                                                        href="#Add-new-address" role="tab"
+                                                        aria-controls="account-detail" aria-selected="true"><i
+                                                            class="fi-rs-edit mr-10"></i>Add new Address</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="wallet_tab" data-bs-toggle="tab"
+                                                    href="#wallet" role="tab" aria-controls="account-detail"
+                                                    aria-selected="false"><i class="fi-rs-money mr-10"></i>My Wallet</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="offers_tab" data-bs-toggle="tab"
+                                                    href="#offers" role="tab" aria-controls="account-detail"
+                                                    aria-selected="false"><i class="fi-rs-money mr-10"></i>Offers & Coupons</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/login"><i
+                                                            class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                                </li>
+                                               
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="tab-content dashboard-content">
+                                            <div class="tab-pane fade active show" id="dashboard" role="tabpanel"
+                                                aria-labelledby="dashboard-tab">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5 class="mb-0">Welcome Back !</h5>
+                                                    </div>
+                                                    <br>
+                                                    <label>Name</label>
+                                                    <p>
+                                                        <%=userData.name%>
+                                                    </p>
+                                                    <br>
+                                                    <label>Email</label>
+                                                    <p>
+                                                        <%=userData.email%>
+                                                    </p>
+                                                    <br>
+                                                    <label>Your Referral Code</label>
+                                                    <p>
+                                                        <%=userData.referralCode%>
+                                                    </p>
+                                                    <br>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="orders" role="tabpanel"
+                                                aria-labelledby="orders-tab">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5 class="mb-0">Your Orders</h5><br>
+
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>sl.no</th>
+                                                                        <th>Order Id</th>
+                                                                        <th>Date</th>
+                                                                        <th>Status</th>
+                                                                        <th>Total</th>
+                                                                        <th>Action</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <%for(let i=0; i< orderdata.length; i++){%>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%=i+1%>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%=orderdata[i].orderId%>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%=orderdata[i].createdOn.toLocaleDateString()%>
+                                                                            </td>
+                                                                            <%if(orderdata[i].status==="Pending"){%>
+                                                                                <td
+                                                                                    style="color: rgb(1, 170, 255);font-weight: bold;">
+                                                                                    <%=orderdata[i].status%>
+                                                                                </td>
+                                                                                <%}else
+                                                                                    if(orderdata[i].status==="Delivered"
+                                                                                    ){%>
+                                                                                    <td
+                                                                                        style="color: rgb(5, 231, 5); font-weight:300;">
+                                                                                        <%=orderdata[i].status%>
+                                                                                    </td>
+                                                                                    <%}else{%>
+                                                                                        <td
+                                                                                            style="color: rgb(255, 0, 0); font-weight: bold;">
+                                                                                            <%=orderdata[i].status%>
+                                                                                        </td>
+                                                                                        <%}%>
+                                                                                            <td>₹
+                                                                                                <%=orderdata[i].totalAmount%>
+                                                                                            </td>
+                                                                                            <td><a
+                                                                                                    href="/fullOrderDetails?orderid=<%=orderdata[i]._id%>">View</a>
+                                                                                            </td>
+
+                                                                        </tr>
+                                                                        <%}%>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           
+                                            
+                                            
+                                            <div class="tab-pane fade" id="wallet" role="tabpanel">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0" style="color: red;font-weight: bolder;">YOUR WALLET</h5><br>
+                                                    <span class="mb-0" style="color: rgb(9, 0, 0);font-weight: bold;">TOTAL: ₹<%=userData.wallet%></span><br>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Transaction id</th>
+                                                                    <th>Transaction Type</th>
+                                                                    <th>Transaction Amount</th>
+                                                                    <th>Transaction Date</th>
+                                                                    <th>Order Id</th>
+                                                                   
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <span>Transaction History</span>
+                                                                <%for(let i=0; i< transactionData.length; i++){%>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%=transactionData[i]._id%>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <%=transactionData[i].transactionType%>
+                                                                        </td>
+                                                                        <td>
+                                                                            ₹ <%=transactionData[i].transactionAmount%>/-
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= transactionData[i].transactionDate.toLocaleDateString() %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=transactionData[i].orderId%>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+                                                                    <%}%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                            <div class="tab-pane fade" id="offers" role="tabpanel"
+                                                aria-labelledby="address-tab">
+                                                <div class="row">
+                                                    <%if(coupon.length===0){%>
+                                                        <p style="color: red; font-weight: 300;">No Offers availble now
+                                                            !</p>
+                                                        <%}%>
+                                                            <%for(let i=0; i< coupon.length; i++){%>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="card mb-3 mb-lg-0" style="border: 1px dashed red">
+                                                                        <div class="card-header">
+                                                                            <h5 class="mb-0" style="color: red;font-weight: bolder;"><%=coupon[i].Code%>
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <p style="color: black;font-weight: bolder;">
+                                                                               Minimum Purchase Amount: ₹<%=coupon[i].minimumAmount%>
+                                                                            </p><br>
+                                                                            <p style="color: black;font-weight: bolder;">
+                                                                               Discount :<%=coupon[i].Discount%>%
+                                                                             </p><br>
+                                                                            <p style="color: black;font-weight: bolder;">
+                                                                                <%=coupon[i].Discription%>
+                                                                            </p><br>
+
+
+                                                                            <p style="background-color: rgb(242, 255, 0);color: black;font-weight: bolder;">
+                                                                               Expiring at : <br> <%=coupon[i].Expiry%>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <%}%>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="address" role="tabpanel"
+                                                aria-labelledby="address-tab">
+                                                <div class="row">
+                                                    <%if(userData.Address.length===0){%>
+                                                        <p style="color: red; font-weight: 300;">No addresses added yet
+                                                            !</p>
+                                                        <%}%>
+                                                            <%for(let i=0; i< userData.Address.length; i++){%>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="card mb-3 mb-lg-0">
+                                                                        <div class="card-header">
+                                                                            <h5 class="mb-0">Address #<%=i+1%>
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="card-body">
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Name%>
+                                                                            </p>
+
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Housename%>
+                                                                            </p>
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Street%>
+                                                                            </p>
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Pincode%>
+                                                                            </p>
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Country%>
+                                                                            </p>
+
+                                                                            <p>
+                                                                                <%=userData.Address[i].Phone%>
+                                                                            </p>
+
+
+
+                                                                            <a href="/editprofileaddress?addressId=<%=userData.Address[i]._id%>"
+                                                                                class="btn-small edit-button"
+                                                                                id="addresseditbutton">Edit</a>
+
+
+
+                                                                            <button id="addresseditbutton"
+                                                                                style="margin-left: 30%;"
+                                                                                onclick="confirmDelete('<%= userData.Address[i]._id %>')">
+                                                                                Delete
+                                                                            </button>
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <%}%>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="account-detail" role="tabpanel"
+                                                aria-labelledby="account-detail-tab">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Account Details</h5>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                        <form method="post" name="enq" action="/edit-user-address">
+                                                            <%if (typeof addressmessage !=='undefined' ) {%>
+                                                                <p style="color:red;" id="addressmsg">
+                                                                    <%=locals.addressmessage %>
+                                                                </p>
+                                                                <%}%>
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>User name<span
+                                                                                    class="required">*</span></label>
+                                                                            <input required class="form-control square"
+                                                                                name="Username" type="text"
+                                                                                value="<%=userData.name%>">
+
+                                                                        </div>
+
+                                                                        <div class="form-group col-md-12">
+                                                                            <label>Email Address <span
+                                                                                    class="required">*</span></label>
+                                                                            <input required class="form-control square"
+                                                                                name="email" type="email"
+                                                                                value="<%=userData.email%>">
+                                                                            <input type="hidden" name="userId"
+                                                                                value="<%=userData._id%>">
+                                                                        </div>
+
+                                                                        
+
+                                                                        <div class="col-md-12">
+                                                                            <button type="submit"
+                                                                                class="btn btn-fill-out submit"
+                                                                                name="submit"
+                                                                                value="Submit">Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                        </form>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="password-change" role="tabpanel"
+                                                aria-labelledby="password-change-tab">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Update your Password</h5>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                        <form method="post" name="enq" action="/changepassword"
+                                                            onsubmit="return checkFormValidity2()">
+                                                            <%if(typeof textmsg !=="undefined" ){%>
+                                                                <h style="color:red; ;" id="errormsg">
+                                                                    <%=textmsg%>
+                                                                        </h5>
+                                                                        <%}%>
+
+
+                                                                            <div class="willhideonce">
+                                                                                <label>Current Password</label>
+                                                                                <input class="form-control square"
+                                                                                    name="currentpassword"
+                                                                                    type="password"
+                                                                                    id="currentPassword"><br>
+                                                                                <a
+                                                                                    onclick="checkPassword(document.getElementById('currentPassword').value)">CLICK
+                                                                                    HERE TO VALIDATE</a>
+                                                                                <div id="currentpassworderrormessage"
+                                                                                    style="color: red; font-weight: bold">
+                                                                                </div><br>
+                                                                            </div>
+                                                                            <div id="successmessage"
+                                                                                style="color: rgb(0, 255, 17);font-weight: bold;">
+                                                                            </div>
+
+                                                                            <div class="row myDiv">
+                                                                                <div class="form-group col-md-12">
+
+                                                                                    <label>New Password</label>
+                                                                                    <input class="form-control square"
+                                                                                        name="password" type="password"
+                                                                                        id="changepasswordhere">
+                                                                                    <div id="passworderrormessage"
+                                                                                        style="color: red;"></div>
+
+                                                                                    <label>Confirm Password <span
+                                                                                            class="required">*</span></label>
+                                                                                    <input class="form-control square"
+                                                                                        name="confirmpassword"
+                                                                                        type="password"
+                                                                                        id="confirmpasswordhere">
+                                                                                    <div id="confirmpassserrormessage"
+                                                                                        style="color: red;"></div>
+
+                                                                                    <input type="hidden" name="userId"
+                                                                                        value="<%=userData._id%>">
+                                                                                </div>
+
+                                                                                <div class="col-md-12">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-fill-out submit"
+                                                                                        name="submit"
+                                                                                        value="Submit">Update</button>
+                                                                                </div>
+                                                                            </div>
+                                                        </form>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="Add-new-address" role="tabpanel"
+                                                aria-labelledby="Add-new-address-tab">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Add new address to your profile</h5>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                        <form method="post" name="enq" action="/addnewaddress"
+                                                            onsubmit="return checkFormValidity()">
+                                                            <%if (typeof message !=='undefined' ) {%>
+                                                                <p style="color:red;">
+                                                                    <%=locals.message %>
+                                                                </p>
+                                                                <%}%>
+
+
+
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-12">
+                                                                            <label>House name<span
+                                                                                    class="required">*</span></label>
+                                                                            <input class="form-control square"
+                                                                                name="House-name" type="text"
+                                                                                id="housename">
+                                                                            <div id="houseerror" style="color: red;">
+                                                                            </div>
+
+
+
+                                                                            <label>Street<span
+                                                                                    class="required">*</span></label>
+                                                                            <input class="form-control square"
+                                                                                name="Street-name" type="text"
+                                                                                id="streetname">
+                                                                            <div id="streeterror" style="color: red;">
+                                                                            </div>
+
+
+
+                                                                            <label>Pincode<span
+                                                                                    class="required">*</span></label>
+                                                                            <input class="form-control square"
+                                                                                name="Pincode" type="number"
+                                                                                id="pincode">
+                                                                            <div id="pincodeerror" style="color: red;">
+                                                                            </div>
+
+
+
+                                                                            <label>Country<span
+                                                                                    class="required">*</span></label>
+                                                                            <input class="form-control square"
+                                                                                name="Country" type="text" id="country">
+                                                                            <div id="countryerror" style="color: red;">
+                                                                            </div>
+
+
+
+                                                                            <label>Phone<span
+                                                                                    class="required">*</span></label>
+                                                                            <input class="form-control square"
+                                                                                name="Phone" type="number" id="phone">
+                                                                            <div id="phoneerror" style="color: red;">
+                                                                            </div>
+
+
+
+                                                                            <input type="hidden" name="userId"
+                                                                                value="<%=userData._id%>">
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <button type="submit"
+                                                                                class="btn btn-fill-out submit"
+                                                                                name="submit" value="Submit">Add to
+                                                                                profile</button>
+                                                                        </div>
+                                                                    </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- <section id="testimonials" class="section-padding">
+            <div class="container pt-25">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-1.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    J. Bezos
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-3.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    B.Gates
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-2.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    B. Meyers
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-4.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    J. Bezos
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-5.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    B.Gates
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hero-card box-shadow-outer-6 wow fadeIn animated mb-30 hover-up d-flex">
+                            <div class="hero-card-icon icon-left-2 hover-up ">
+                                <img class="btn-shadow-brand hover-up border-radius-5 bg-brand-muted" src="assets/imgs/page/avatar-1.jpg" alt="">
+                            </div>
+                            <div class="pl-30">
+                                <h5 class="mb-5 fw-500">
+                                    B. Meyers
+                                </h5>
+                                <p class="font-sm text-grey-5">Adobe Jsc</p>
+                                <p class="text-grey-3">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt voluptatum dicta reprehenderit accusamus voluptatibus voluptas."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-30">
+                    <div class="col-12 text-center">
+                        <p class="wow fadeIn animated">
+                            <a class="btn btn-brand text-white btn-shadow-brand hover-up btn-lg">View More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+    </main>
+    <%-include(".././../Layouts/userfooter.ejs")%>
+
+    <!-- Preloader Start -->
+    <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <!-- Template  JS -->
+    <script src="assets/js/main.js"></script>
+    <script>
+
+        //to hide the change password div 
+        document.querySelector('.myDiv').classList.add('hidden');
+
+
+
+
+        // Get the current URL
+        var currentUrl = window.location.pathname;
+
+        // Check if the current URL matches the profile page
+        if (currentUrl === '/userdashboard') {
+            // Add the "active" class to the profile link
+            document.getElementById('profileLink').classList.add('active');
+        }
+
+
+
+
+        //validatin for add address in profile 
+        const phoneinput = document.getElementById('phone')
+        const countryinput = document.getElementById('country')
+        const pincodeinput = document.getElementById('pincode')
+        const streetnameinput = document.getElementById('streetname')
+        const housenameinput = document.getElementById('housename')
+        const nameinput = document.getElementById('name')
+
+
+        const namemessage = document.getElementById('nameerror')
+        const housemessage = document.getElementById('houseerror')
+        const streetmessage = document.getElementById('streeterror')
+        const pincodemessage = document.getElementById('pincodeerror')
+        const countrymessage = document.getElementById('countryerror')
+        const phonemessage = document.getElementById('phoneerror')
+
+        const nameRegex = /^[A-Za-z\s]{2,}$/;
+        const phoneregex = /^[1-9]\d{9}$/;
+
+
+        phoneinput.addEventListener('input', () => {
+            const phone = phoneinput.value
+            const isValid = validatephone(phone);
+        })
+        countryinput.addEventListener('input', () => {
+            const country = countryinput.value
+            const isValid = validatecountry(country);
+        })
+        pincodeinput.addEventListener('input', () => {
+            const pincode = pincodeinput.value
+            const isValid = validatepincode(pincode);
+        })
+        streetnameinput.addEventListener('input', () => {
+            const street = streetnameinput.value
+            const isValid = validatestreet(street);
+        })
+        housenameinput.addEventListener('input', () => {
+            const house = housenameinput.value
+            const isValid = validatehouse(house);
+        })
+        nameinput.addEventListener('input', () => {
+            const name = nameinput.value
+            const isValid = validatename(name);
+        })
+
+
+        function validatephone(phone) {
+            if (phone.trim().length < 1) {
+                phonemessage.textContent = "Phone cannot be empty"
+                return false
+            }
+            if (!phoneregex.test(phone.trim())) {
+                phonemessage.textContent = "Enter a valid Phone number"
+                return false
+            }
+            phonemessage.textContent = ""
+            return true
+        }
+
+
+        function validatecountry(country) {
+            if (country.trim().length < 1) {
+                countrymessage.textContent = "Country cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(country.trim())) {
+                countrymessage.textContent = "Country cannot be a number"
+                return false
+            }
+            countrymessage.textContent = ""
+            return true
+        }
+
+
+        function validatepincode(pincode) {
+            if (pincode.trim().length < 1) {
+                pincodemessage.textContent = "pincode cannot be empty"
+                return false
+            }
+            pincodemessage.textContent = ""
+            return true
+        }
+
+        function validatestreet(street) {
+            if (street.trim().length < 1) {
+                streetmessage.textContent = "Street name cannot be empty"
+                return false
+            }
+            streetmessage.textContent = ""
+            return true
+        }
+
+
+        function validatehouse(house) {
+            if (house.trim().length < 1) {
+                housemessage.textContent = "House name cannot be empty"
+                return false
+            }
+            housemessage.textContent = ""
+            return true
+        }
+
+
+        function validatename(name) {
+            if (name.trim().length < 1) {
+                namemessage.textContent = "name cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                namemessage.textContent = "Name cannot be a number"
+                return false
+            }
+
+            namemessage.textContent = ""
+            return true
+        }
+
+
+        function checkFormValidity() {
+            let nameIsValid = validatename(nameinput.value);
+            let HouseIsValid = validatehouse(housenameinput.value);
+            let StreetIsValid = validatestreet(streetnameinput.value);
+            let pincodeIsValid = validatepincode(pincodeinput.value);
+            let countryIsValid = validatecountry(countryinput.value);
+            let phoneIsValid = validatephone(phoneinput.value);
+
+
+            if (nameIsValid && HouseIsValid && StreetIsValid && pincodeIsValid && countryIsValid && phoneIsValid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+
+
+
+        //validation for change password in profile
+        const passwordinputt = document.getElementById('changepasswordhere')
+        const confirmpasswordinputt = document.getElementById('confirmpasswordhere')
+        const passworderrormessage = document.getElementById('passworderrormessage')
+        const confirmpassworderrormessage = document.getElementById('confirmpassserrormessage')
+
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
+
+
+        passwordinputt.addEventListener('input', () => {
+            const pass = passwordinputt.value
+            const isvalid = validatepass(pass)
+        })
+        confirmpasswordinputt.addEventListener('input', () => {
+            const cpass = confirmpasswordinputt.value
+            const isvalid = validatecpass(cpass)
+        })
+
+
+
+        function validatepass(pass) {
+            if (pass.trim().length < 1) {
+                passworderrormessage.textContent = "password cannot be empty"
+                return false
+            }
+            if (!passwordRegex.test(pass.trim())) {
+                passworderrormessage.textContent = "Password must contain one uppercase , one lowercase, one special character and one digit"
+                return false
+            }
+            passworderrormessage.textContent = ""
+            return true
+        }
+
+
+        function validatecpass(cpass) {
+            if (cpass.trim().length < 1) {
+                confirmpassworderrormessage.textContent = "confirm password cannot be empty"
+                return false
+            }
+            if (!passwordRegex.test(cpass.trim())) {
+                confirmpassworderrormessage.textContent = "Password must contain one uppercase , one lowercase, one special character and one digit"
+                return false
+            }
+            confirmpassworderrormessage.textContent = ""
+            return true
+
+        }
+
+        function checkFormValidity2() {
+            let pasvalid = validatepass(passwordinputt.value);
+            let cpasvalid = validatecpass(confirmpasswordinputt.value);
+
+
+            if (pasvalid && cpasvalid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+        //checking current password
+        function checkPassword(currentPassword) {
+            $.ajax({
+                url: '/validateCpass',
+                method: 'POST',
+                data: JSON.stringify({ currentPassword: currentPassword }), // Send as an object with property name
+                contentType: 'application/json',
+                dataType: 'json', // Specify the expected data type
+                success: (response) => {
+                    document.getElementById('successmessage').innerText = response.message;
+                    document.querySelector('.myDiv').classList.remove('hidden');
+                    document.querySelector('.willhideonce').classList.add('hidden');
+
+                    setTimeout(() => {
+                        document.getElementById('successmessage').innerText = " "
+                    }, 5000)
+
+                    setTimeout(() => {
+                        document.querySelector('.myDiv').classList.add('hidden');
+                        document.querySelector('.willhideonce').classList.remove('hidden');
+                        document.getElementById('currentpassworderrormessage').innerText = 'Oops Timeout ! try again..';
+                    }, 60000)
+                    setTimeout(() => {
+                        document.getElementById('currentpassworderrormessage').innerText = ''
+                    }, 5000)
+
+                },
+                error: (jqXHR, textStatus, errorThrown) => {
+                    document.getElementById('currentpassworderrormessage').innerText = jqXHR.responseJSON.message;
+                    setTimeout(() => {
+                        document.getElementById('currentpassworderrormessage').innerText = '';
+                    }, 3000);
+                }
+            });
+        }
+
+
+
+        //sweet alert for address deletion 
+
+        function confirmDelete(addressId) {
+            Swal.fire({
+                title: 'Delete Address',
+                text: 'Are you sure you want to delete this address?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user confirms, redirect to the delete URL
+                    window.location.href = `/deleteaddress?addressId=${addressId}`;
+                }
+            });
+        }
+
+
+      
+        
+    </script>
+
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/page-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:27:15 GMT -->
+
+</html>

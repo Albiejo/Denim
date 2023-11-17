@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:20:36 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Evara - eCommerce HTML Template</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/public/assets/imgs/denim brand logo.png">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
+<style>
+.star-rating {
+    display: flex;
+}
+
+/* Hide the radio inputs */
+input[type="radio"] {
+    display: none;
+}
+
+/* Style the star labels */
+label {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    background-image: url('path/to/star-outline.png'); /* Use your star outline image */
+    background-size: cover;
+}
+
+/* Style the filled star when radio input is checked */
+input[type="radio"]:checked + label {
+    background-image: url('/public/assets/imgs/download.png'); /* Use your filled star image */
+}
+</style>
+</head>
+
+<body>
+
+    <header class="header-area header-style-1 header-height-2">
+        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info">
+                            <ul>
+                                <li><i class="fi-rs-marker"></i><a href="#">Our location</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="text-center">
+                            <div id="news-flash" class="d-inline-block">
+                                <ul>
+                                    <li>Get great denims up to 50% off</li>
+                                    <li>Supper Value Deals - Save more with coupons</li>
+                                    <li>Trendy denim shorts , save up 35% every tuesday</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info header-info-right">
+                            <ul>
+                                <li><i class="fi-rs-user"></i><a href="/logout">Logout</a>
+                                </li>
+                                <li><i class="fi-rs-user"></i><a href="/userdashboard">Profile</a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="logo logo-width-1">
+                        <a href="#"><img
+                                src="/public/assets/imgs/denim brand logo.png"
+                                alt="logo"></a>
+                    </div>
+                    <div class="header-right">
+                        <div class="search-style-3" style="width: 70%;margin-left: 5%;"">
+                            <form action="/search" method="get">
+                                <div class="search-container">
+                                    <input type="text" class="search-input" name="query" placeholder="Search...">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="header-action-right"  >
+                            <div class="header-action-2" >
+                                <div class="header-action-icon-2">
+                                    <a href="/wishlist">
+                                        <img class="svgInject" alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
+                                        
+                                        <span class="pro-count blue" id="wishlistcount">0</span>
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="/shopcart">
+                                        <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
+                                        <span class="pro-count blue">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="header-bottom header-bottom-bg-color sticky-bar" >
+            <div class="container">
+                <div class="header-wrap header-space-between position-relative">
+                    <div class="logo logo-width-1 d-block d-lg-none">
+                        <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                    </div>
+                    <div class="header-nav d-none d-lg-flex" style="margin-left: 35%;">
+                      
+                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li><a  href="/loginhomepage">Home</a>
+        
+                                    </li>
+                                  
+                            
+                                    <li><a href="/filter?gender=male">Men</a>
+                                        
+                                    </li>
+                                    <li class="position-static"><a href="/filter?gender=female">Women</a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="/contactus">Contact</a>
+                                    </li>
+                                    <li>
+                                        <a href="/aboutus">About us</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- <div class="hotline d-none d-lg-block">
+                        <p><i class="fi-rs-headset"></i><span>Hotline</span>+91-9061609076</p>
+                    </div> -->
+
+                     <!--modal displayed after item added to wishlist -->
+                     <div id="wishlistModal" class="modal">
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <p id="wishlistmsg">Item added to your wishlist!</p>
+                        </div>
+                      </div>
+                      
+                    <!--modal displayed after item added to wishlist -->
+
+
+                    <p class="mobile-promotion">Every Tuesday<span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
+                    </p>
+                    
+                    <div class="header-action-right d-block d-lg-none">
+                        <div class="header-action-2">
+                            <div class="header-action-icon-2">
+                                
+                                <a href="shop-wishlist.html">
+                                    <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
+                                    <span class="pro-count white" ></span>
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon" href="shop-cart.html">
+                                    <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
+                                    <span class="pro-count white">2</span>
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2 d-block d-lg-none">
+                                <div class="burger-icon burger-icon-white">
+                                    <span class="burger-icon-top"></span>
+                                    <span class="burger-icon-mid"></span>
+                                    <span class="burger-icon-bottom"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="#"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="#">
+                        <input type="text" placeholder="Search for items…">
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+                    <div class="main-categori-wrap mobile-header-border">
+                        <a class="categori-button-active-2" href="#">
+                            <span class="fi-rs-apps"></span> Browse Categories
+                        </a>
+                        <div class="categori-dropdown-wrap categori-dropdown-active-small">
+                            <ul>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-dress"></i>Women's Clothing</a>
+                                </li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-tshirt"></i>Men's Clothing</a>
+                                </li>
+                                <li> <a href="shop-grid-right.html"><i class="evara-font-smartphone"></i> Cellphones</a>
+                                </li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>Computer &
+                                        Office</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-cpu"></i>Consumer
+                                        Electronics</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-home"></i>Home & Garden</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-high-heels"></i>Shoes</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-teddy-bear"></i>Mother &
+                                        Kids</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-kite"></i>Outdoor fun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- mobile menu start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="index.html">Home</a>
+                               
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="shop-grid-right.html">All Categories</a>
+                               
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men</a>
+                                    
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="blog-category-fullwidth.html">Women</a>
+                                
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">About us</a>
+                               
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
+
+
+
+
+                <div class="mobile-header-info-wrap mobile-header-border">
+
+                    <div class="single-mobile-header-info">
+                        <a href="page-login-register.html">Log In / Sign Up </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="#">+91-9061609076</a>
+                    </div>
+                </div>
+                <div class="mobile-social-icon">
+                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/loginhomepage" rel="nofollow">Home</a>
+                    <span></span> Fashion
+                    <span></span> Abstract Print Patchwork Dress
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-detail accordion-detail">
+                            <div class="row mb-50 ml-30">
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="detail-gallery">
+                                        <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+
+                                        <!-- MAIN SLIDES -->
+                                        <div class="product-image-slider" style="border: 1px solid gray;">
+
+                                            <%for(let i=0;i< product.images.length;i++){%>
+                                                <figure class="border-radius-10">
+                                                    <img src="/cloud_images/<%= product.images[i].url%>"
+                                                        alt="product image">
+                                                </figure>
+                                                <%}%>
+                                        </div>
+                                        <!-- THUMBNAILS -->
+                                        <div class="slider-nav-thumbnails pl-15 pr-15">
+                                            <%for(let i=0; i< product.images.length; i++){%>
+                                                <div><img src="/cloud_images/<%=product.images[i].url%>"
+                                                        alt="product image"></div>
+                                                <%}%>
+                                        </div>
+                                    </div>
+                                    <!-- End Gallery -->
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-info">
+                                        <h2 class="title-detail">
+                                            <%=product.productName%>
+                                        </h2>
+                                        <div class="product-detail-rating">
+                                            <div class="pro-details-brand">
+                                                <span> Brand:<span style="color: red; font-weight: bold; padding-left: 10px;">
+                                                        <%=product.brand%></span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix product-price-cover">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand">₹<%=product.offerPrice%></span></ins>
+                                                <ins><span class="old-price font-md ml-15">₹<%=product.regularPrice%>
+                                                    </span></ins>
+                                                <!-- <span class="save-price  font-md color3 ml-15">25% Off</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                        <div class="product_sort_info font-xs mb-30">
+                                            <ul>
+                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return
+                                                    Policy</li>
+                                                <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <form method="post" action="/addtocart">
+                                            <div class="attr-detail attr-size">
+                                                <strong class="mr-10">Size</strong>
+                                                <% if (product.size && product.size.length> 0) { %>
+                                                    <ul class="list-filter size-filter font-small">
+
+                                                        <div class="sizes">
+                                                            <% for (let i=0; i < product.size.length; i++) { %>
+                                                                <label class="size-label">
+                                                                    <input type="radio" name="size"
+                                                                        value="<%= product.size[i] %>"
+                                                                        <%if(i===0){%>checked<%}%>><br>
+                                                                        <span class="size-value">
+                                                                            <%= product.size[i] %>
+                                                                        </span>
+                                                                </label>
+                                                                &nbsp;
+                                                                <% } %>
+                                                        </div>
+
+                                                    </ul>
+                                                    <% } else { %>
+                                                        <!-- Handle case when sizes array is empty or undefined -->
+                                                        <p>No sizes available</p>
+                                                        <% } %>
+
+                                            </div>
+                                            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                            <div class="detail-extralink">
+                                                <div class="product-extra-link2">
+                                                    <%if(product.stock==0){%>
+                                                        <button type="submit" class="btn btn-outline-danger text-danger"
+                                                            disabled>Out Of Stock</button>
+                                                        <%}else{%>
+
+
+                                                            <button type="submit" class="button button-add-to-cart">Add
+                                                                to
+                                                                cart</button>
+                                                            <input type="hidden" value="<%=product._id%>"
+                                                                name="productId">
+
+                                                            <%}%>
+                                        </form>
+
+
+                                        <a aria-label="Add now" class="action-btn addwnow"
+                                            data-item-id="<%=product._id%>"><i class="fi-rs-heart" ></i></a>
+
+
+
+                                    </div>
+                                </div>
+                                <ul class="product-meta font-xs color-grey mt-50">
+                                    <li class="mb-5">Tags: <a href="#" rel="tag">
+                                            <%=product.gender%>
+                                        </a>, <a href="#" rel="tag">
+                                            <%=product.category%>
+                                        </a></li>
+                                    <li>Availability:<span class="in-stock text-success ml-5">
+                                            <%=product.stock%> Items In Stock
+                                        </span></li>
+                                </ul>
+                            </div>
+                            <!-- Detail Info -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 m-auto entry-main-content">
+                            <h2 class="section-title style-1 mb-30">Description</h2>
+                            <div class="description mb-50">
+                                <p>
+                                    <%=product.Discription%>
+                                </p>
+                                <p>Average Rating: <%= product.averageRating.toFixed(1) %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="section-title style-1 mb-30 mt-30">Reviews (<%=product.reviews.length%>)</h3>
+                    <div class="comments-area style-2">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="mb-30">Customer questions & answers</h4>
+                                <div class="comment-list">
+
+                                    <% for(let i=0; i< product.reviews.length; i++) { %>
+                                        <div class="single-comment justify-content-between d-flex">
+                                            <div class="user justify-content-between d-flex">
+                                                <div class="thumb text-center">
+                                                    <h6><a href="#"><%=product.reviews[i].customerName%></a></h6>
+                                                </div>
+                                                <div class="desc">
+                                                    <div class=" d-inline-block">
+                                                        <!-- <div class="product-rating" style="width: <%= product.reviews[i].rating * 20 %>%;"></div> -->
+                                                        <span style="color:blue;">Rating:<%=product.reviews[i].rating%>/5</span>                                                    </div>
+                                                    <p><%=product.reviews[i].review%></p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="font-xs mr-30"><%=product.reviews[i].date%></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                    
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4">
+                                <h4 class="mb-30">Customer reviews</h4>
+                                <div class="d-flex mb-30">
+                                    <div class="product-rate d-inline-block mr-15">
+                                        <div class="product-rating" style="width:90%">
+                                        </div>
+                                    </div>
+                                    <h6>4.8 out of 5</h6>
+                                </div>
+                                <div class="progress">
+                                    <span>5 star</span>
+                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                </div>
+                                <div class="progress">
+                                    <span>4 star</span>
+                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                                <div class="progress">
+                                    <span>3 star</span>
+                                    <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                </div>
+                                <div class="progress">
+                                    <span>2 star</span>
+                                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                </div>
+                                <div class="progress mb-30">
+                                    <span>1 star</span>
+                                    <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                </div>
+                                <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="comment-form">
+                <h4 class="mb-15">Add a review</h4>
+                <div class="product-rate d-inline-block mb-30">
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+
+
+                        <form class="form-contact " action="/productview"  method="post">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                    </div>
+                                    <input name="productid" hidden value="<%=product._id%>">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="name" id="name" type="text"vplaceholder="Name">
+                                    </div>
+                                    
+                                </div>
+                                <label for="rate">Rate out of 5</label>
+                                <input type="number" name="rate" style="width: 20%;">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm">Submit Review</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- <div class="row mt-60">
+                <div class="col-12">
+                    <h3 class="section-title style-1 mb-30">Related products</h3>
+                </div>
+                <div class="col-12">
+                    <div class="row related-products">
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap small hover-up">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn small hover-up"
+                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
+"><i class="fi-rs-search"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
+                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn small hover-up"
+                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass
+                                            Headphone</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$238.85 </span>
+                                        <span class="old-price">$245.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap small hover-up">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn small hover-up"
+                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
+"><i class="fi-rs-search"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
+                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn small hover-up"
+                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="sale">-12%</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth
+                                            Speaker</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$138.85 </span>
+                                        <span class="old-price">$145.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap small hover-up">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn small hover-up"
+                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
+"><i class="fi-rs-search"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
+                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn small hover-up"
+                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="new">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA
+                                            Goole</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$738.85 </span>
+                                        <span class="old-price">$1245.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap small hover-up mb-0">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn small hover-up"
+                                            data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
+                                                class="fi-rs-search"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
+                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn small hover-up"
+                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K
+                                            2021EF</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>$89.8 </span>
+                                        <span class="old-price">$98.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="banner-img banner-big wow fadeIn f-none animated mt-50">
+                <img class="border-radius-10" src="assets/imgs/banner/banner-4.png" alt="">
+                <div class="banner-text">
+                    <h4 class="mb-15 mt-40">Repair Services</h4>
+                    <h2 class="fw-600 mb-20">We're denim <br>Authorised Service Provider</h2>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
+    <%-include(".././../Layouts/userfooter.ejs")%>
+
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="assets/js/plugins/jquery.elevatezoom.js"></script>
+    <!-- Template  JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.addwnow').on('click', function () {
+                let product_id = $(this).data('item-id');
+
+                $.ajax({
+                    url: '/addtowishlist',
+                    method: 'POST',
+                    data: { product_id: product_id },
+                    success: function (msg) {
+                        wishlistMessage.innerText = msg.message;
+                        wishlistModal.style.display = "block";
+
+                        setTimeout(function () {
+                            wishlistModal.style.display = "none";
+                        }, 3000);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/shop-product-full.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:43 GMT -->
+
+</html>

@@ -1,0 +1,84 @@
+<%-include(".././../Layouts/adminhead.ejs")%>
+
+        <section class="content-main">
+            <div class="row">
+                <div class="col-9">
+                    <div class="content-header">
+                        <h2 class="content-title">Edit Coupon</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                       
+                        <div class="card-body">
+                            <form  method="post">
+                                <div class="mb-4">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label for="couponcode" style="color: black;font-weight: bold;">Coupon code:</label><br>
+                                            <input type="text"name="couponcode" id="couponcode" value="<%=couponData.Code%>">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="coupondiscription" style="color: black;font-weight: bold;">Coupon Discription:</label><br>
+                                            <input type="text"name="coupondiscription" id="coupondiscription" value="<%=couponData.Discription%>">
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <label for="Discount" style="color: black;font-weight: bold;">Discount:</label><br>
+                                            <input type="number" name="Discount" id="Discount" value="<%=couponData.Discount%>">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="MazimumAmount" style="color: black;font-weight: bold;">Mazimum Amount:</label><br>
+                                            <input type="number" name="MazimumAmount" id="MazimumAmount" value="<%=couponData.maximumAmount%>">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="MinimumAmount" style="color: black;font-weight: bold;">Minimum Amount:</label><br>
+                                            <input type="number" name="MinimumAmount" id="MinimumAmount" value="<%=couponData.minimumAmount%>">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="couponexpiry" style="color: black;font-weight: bold;">Coupon expiry:</label><br>
+                                            <span style="color: red;"><%=couponData.Expiry%></span><br><br>
+                                            <input type="date" name="couponexpiry" id="couponexpiry" value="<%=couponData.Expiry%>">
+                                        </div>
+                                        <input type="hidden" value="<%=couponData._id%>" name="couponid">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="text-muted material-icons md-post_add"></i>Update coupon</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!-- card end// -->
+                </div>
+
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Denim Stores  .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="admin-assets/js/vendors/select2.min.js"></script>
+    <script src="admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="admin-assets/js/vendors/chart.js"></script>
+    <!-- Main Script -->
+    <script src="admin-assets/js/main.js" type="text/javascript"></script>
+    <script src="admin-assets/js/custom-chart.js" type="text/javascript"></script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+</html>

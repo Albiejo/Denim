@@ -1,0 +1,429 @@
+<%-include(".././../Layouts/userheader.ejs")%>
+
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/loginhomepage" rel="nofollow">Home</a>
+                    <span></span> Pages
+                    <span></span> Account
+                </div>
+            </div>
+        </div>
+        
+               
+
+               
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0 text-center" style="color: black;font-weight: bolder;">YOUR ORDERS</h5><br>
+                <a href="/userdashboard"><button class="btn">Go back</button></a>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>sl.no</th>
+                                <th>Order Id</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for(let i=0; i< orderdata.length; i++){%>
+                                <tr>
+                                    <td>
+                                        <%=i+1%>
+                                    </td>
+                                    <td>
+                                        <%=orderdata[i].orderId%>
+                                    </td>
+                                    <td>
+                                        <%=orderdata[i].createdOn.toLocaleDateString()%>
+                                    </td>
+                                    <%if(orderdata[i].status==="Pending"){%>
+                                        <td
+                                            style="color: rgb(1, 170, 255);font-weight: bold;">
+                                            <%=orderdata[i].status%>
+                                        </td>
+                                        <%}else
+                                            if(orderdata[i].status==="Delivered"
+                                            ){%>
+                                            <td
+                                                style="color: rgb(5, 231, 5); font-weight:300;">
+                                                <%=orderdata[i].status%>
+                                            </td>
+                                            <%}else{%>
+                                                <td
+                                                    style="color: rgb(255, 0, 0); font-weight: bold;">
+                                                    <%=orderdata[i].status%>
+                                                </td>
+                                                <%}%>
+                                                    <td>₹
+                                                        <%=orderdata[i].totalAmount%>
+                                                    </td>
+                                                    <td><a
+                                                            href="/fullOrderDetails?orderid=<%=orderdata[i]._id%>">View</a>
+                                                    </td>
+
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+      <!-- Updated pagination style -->
+<div class="pagination-container">
+    <% if (orderdata.length > 0) { %>
+      <ul class="pagination">
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <li class="<%= i === page ? 'active' : '' %>">
+            <a href="/myOrders?page=<%= i %>"><%= i %></a>
+          </li>
+        <% } %>
+      </ul>
+    <% } else { %>
+      <p>No orders found.</p>
+    <% } %>
+  </div>
+  
+
+
+    </main>
+   
+    <%-include(".././../Layouts/userfooter.ejs")%>
+
+    <!-- Preloader Start -->
+    <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <!-- Template  JS -->
+    <script src="assets/js/main.js"></script>
+    <script>
+
+        //to hide the change password div 
+        document.querySelector('.myDiv').classList.add('hidden');
+
+
+
+
+        // Get the current URL
+        var currentUrl = window.location.pathname;
+
+        // Check if the current URL matches the profile page
+        if (currentUrl === '/userdashboard') {
+            // Add the "active" class to the profile link
+            document.getElementById('profileLink').classList.add('active');
+        }
+
+
+
+
+        //validatin for add address in profile 
+        const phoneinput = document.getElementById('phone')
+        const countryinput = document.getElementById('country')
+        const pincodeinput = document.getElementById('pincode')
+        const streetnameinput = document.getElementById('streetname')
+        const housenameinput = document.getElementById('housename')
+        const nameinput = document.getElementById('name')
+
+
+        const namemessage = document.getElementById('nameerror')
+        const housemessage = document.getElementById('houseerror')
+        const streetmessage = document.getElementById('streeterror')
+        const pincodemessage = document.getElementById('pincodeerror')
+        const countrymessage = document.getElementById('countryerror')
+        const phonemessage = document.getElementById('phoneerror')
+
+        const nameRegex = /^[A-Za-z\s]{2,}$/;
+        const phoneregex = /^[1-9]\d{9}$/;
+
+
+        phoneinput.addEventListener('input', () => {
+            const phone = phoneinput.value
+            const isValid = validatephone(phone);
+        })
+        countryinput.addEventListener('input', () => {
+            const country = countryinput.value
+            const isValid = validatecountry(country);
+        })
+        pincodeinput.addEventListener('input', () => {
+            const pincode = pincodeinput.value
+            const isValid = validatepincode(pincode);
+        })
+        streetnameinput.addEventListener('input', () => {
+            const street = streetnameinput.value
+            const isValid = validatestreet(street);
+        })
+        housenameinput.addEventListener('input', () => {
+            const house = housenameinput.value
+            const isValid = validatehouse(house);
+        })
+        nameinput.addEventListener('input', () => {
+            const name = nameinput.value
+            const isValid = validatename(name);
+        })
+
+
+        function validatephone(phone) {
+            if (phone.trim().length < 1) {
+                phonemessage.textContent = "Phone cannot be empty"
+                return false
+            }
+            if (!phoneregex.test(phone.trim())) {
+                phonemessage.textContent = "Enter a valid Phone number"
+                return false
+            }
+            phonemessage.textContent = ""
+            return true
+        }
+
+
+        function validatecountry(country) {
+            if (country.trim().length < 1) {
+                countrymessage.textContent = "Country cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(country.trim())) {
+                countrymessage.textContent = "Country cannot be a number"
+                return false
+            }
+            countrymessage.textContent = ""
+            return true
+        }
+
+
+        function validatepincode(pincode) {
+            if (pincode.trim().length < 1) {
+                pincodemessage.textContent = "pincode cannot be empty"
+                return false
+            }
+            pincodemessage.textContent = ""
+            return true
+        }
+
+        function validatestreet(street) {
+            if (street.trim().length < 1) {
+                streetmessage.textContent = "Street name cannot be empty"
+                return false
+            }
+            streetmessage.textContent = ""
+            return true
+        }
+
+
+        function validatehouse(house) {
+            if (house.trim().length < 1) {
+                housemessage.textContent = "House name cannot be empty"
+                return false
+            }
+            housemessage.textContent = ""
+            return true
+        }
+
+
+        function validatename(name) {
+            if (name.trim().length < 1) {
+                namemessage.textContent = "name cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                namemessage.textContent = "Name cannot be a number"
+                return false
+            }
+
+            namemessage.textContent = ""
+            return true
+        }
+
+
+        function checkFormValidity() {
+            let nameIsValid = validatename(nameinput.value);
+            let HouseIsValid = validatehouse(housenameinput.value);
+            let StreetIsValid = validatestreet(streetnameinput.value);
+            let pincodeIsValid = validatepincode(pincodeinput.value);
+            let countryIsValid = validatecountry(countryinput.value);
+            let phoneIsValid = validatephone(phoneinput.value);
+
+
+            if (nameIsValid && HouseIsValid && StreetIsValid && pincodeIsValid && countryIsValid && phoneIsValid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+
+
+
+        //validation for change password in profile
+        const passwordinputt = document.getElementById('changepasswordhere')
+        const confirmpasswordinputt = document.getElementById('confirmpasswordhere')
+        const passworderrormessage = document.getElementById('passworderrormessage')
+        const confirmpassworderrormessage = document.getElementById('confirmpassserrormessage')
+
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/;
+
+
+        passwordinputt.addEventListener('input', () => {
+            const pass = passwordinputt.value
+            const isvalid = validatepass(pass)
+        })
+        confirmpasswordinputt.addEventListener('input', () => {
+            const cpass = confirmpasswordinputt.value
+            const isvalid = validatecpass(cpass)
+        })
+
+
+
+        function validatepass(pass) {
+            if (pass.trim().length < 1) {
+                passworderrormessage.textContent = "password cannot be empty"
+                return false
+            }
+            if (!passwordRegex.test(pass.trim())) {
+                passworderrormessage.textContent = "Password must contain one uppercase , one lowercase, one special character and one digit"
+                return false
+            }
+            passworderrormessage.textContent = ""
+            return true
+        }
+
+
+        function validatecpass(cpass) {
+            if (cpass.trim().length < 1) {
+                confirmpassworderrormessage.textContent = "confirm password cannot be empty"
+                return false
+            }
+            if (!passwordRegex.test(cpass.trim())) {
+                confirmpassworderrormessage.textContent = "Password must contain one uppercase , one lowercase, one special character and one digit"
+                return false
+            }
+            confirmpassworderrormessage.textContent = ""
+            return true
+
+        }
+
+        function checkFormValidity2() {
+            let pasvalid = validatepass(passwordinputt.value);
+            let cpasvalid = validatecpass(confirmpasswordinputt.value);
+
+
+            if (pasvalid && cpasvalid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+        //checking current password
+        function checkPassword(currentPassword) {
+            $.ajax({
+                url: '/validateCpass',
+                method: 'POST',
+                data: JSON.stringify({ currentPassword: currentPassword }), // Send as an object with property name
+                contentType: 'application/json',
+                dataType: 'json', // Specify the expected data type
+                success: (response) => {
+                    document.getElementById('successmessage').innerText = response.message;
+                    document.querySelector('.myDiv').classList.remove('hidden');
+                    document.querySelector('.willhideonce').classList.add('hidden');
+
+                    setTimeout(() => {
+                        document.getElementById('successmessage').innerText = " "
+                    }, 5000)
+
+                    setTimeout(() => {
+                        document.querySelector('.myDiv').classList.add('hidden');
+                        document.querySelector('.willhideonce').classList.remove('hidden');
+                        document.getElementById('currentpassworderrormessage').innerText = 'Oops Timeout ! try again..';
+                    }, 60000)
+                    setTimeout(() => {
+                        document.getElementById('currentpassworderrormessage').innerText = ''
+                    }, 5000)
+
+                },
+                error: (jqXHR, textStatus, errorThrown) => {
+                    document.getElementById('currentpassworderrormessage').innerText = jqXHR.responseJSON.message;
+                    setTimeout(() => {
+                        document.getElementById('currentpassworderrormessage').innerText = '';
+                    }, 3000);
+                }
+            });
+        }
+
+
+
+        //sweet alert for address deletion 
+
+        function confirmDelete(addressId) {
+            Swal.fire({
+                title: 'Delete Address',
+                text: 'Are you sure you want to delete this address?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user confirms, redirect to the delete URL
+                    window.location.href = `/deleteaddress?addressId=${addressId}`;
+                }
+            });
+        }
+
+
+      
+        
+    </script>
+
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/page-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:27:15 GMT -->
+
+</html>

@@ -1,0 +1,102 @@
+<%-include(".././../Layouts/adminhead.ejs")%>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">USERS</h2>
+                    <p>VIEW & UPDATE USERS</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>EMAIL ID</th>
+                                            <th>Status</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0;i< usersData.length; i++){%>
+                                        <tr>
+                                            <td><b><%=usersData[i].name%></b></td>
+                                            <td><b><%=usersData[i].email%></b></td>
+                                            <% if(usersData[i].list){ %>
+                                            <td style="color: green;">UNBLOCKED</td>
+                                            <%} else {%>
+                                                <td style="color:red;">BLOCKED</td>
+                                                <% } %>
+                                            <td class="text-end">
+                                                <div class="dropdown">
+                                                    <a href="/admin/blockuser?id=<%=usersData[i]._id%>" class="btn btn-danger rounded font-md font-weight-bold">BLOCK</a>
+                                                    <a href="/admin/unblockuser?id=<%=usersData[i]._id%>" class="btn btn-success rounded font-md font-weight-bold">UNBLOCK</a>
+                                                </div> <!-- dropdown //end -->
+                                            </td>
+                                        </tr>
+                                     <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+
+
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+              <a href="/admin/users?page=<%= currentPage - 1 %>">&laquo; Previous &nbsp;</a>
+            <% } %>
+          
+            Page <%= currentPage %> of <%= totalPages %>
+          <br>
+            <% if (currentPage < totalPages) { %>
+              <a href="/admin/users?page=<%= currentPage + 1 %>"> &nbsp; Next &raquo;</a>
+            <% } %>
+          </div>
+
+          <br><br><br>
+        
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Denim Stores  .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="admin-assets/js/vendors/select2.min.js"></script>
+    <script src="admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="admin-assets/js/main.js" type="text/javascript"></script>
+    <script>
+        // Assuming this code runs on the client side
+        document.addEventListener('DOMContentLoaded', () => {
+            // Your client-side code here
+            let answer = document.getElementById('errormsg');
+            setTimeout(() => {
+                answer.innerHTML = "";
+            }, 4000);
+        });
+    </script>
+
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:21 GMT -->
+</html>

@@ -1,0 +1,201 @@
+<%-include(".././../Layouts/userheader.ejs")%>
+
+    <%if(typeof message !=="undefined" ){%>
+        <h5 style="color:red" id="errormsg" class="text-center">
+            <%=message%>
+        </h5>
+        <%}%>
+
+            <main class="main">
+                
+                <div class="page-header breadcrumb-wrap">
+                    <div class="container">
+                        <div class="breadcrumb">
+                            <a href="/loginhomepage" rel="nofollow">Home</a>
+                            <span></span> Pages
+                            <span></span> Contact us
+                        </div>
+                    </div>
+                </div>
+                <section class="hero-2 bg-green" style="height: 100vh;">
+                    <div class="hero-content">
+                        <div class="container">
+                            <div class="text-center">
+                                <h4 class="text-brand mb-20">Get in touch</h4>
+                                <h1 class="mb-20 wow fadeIn animated font-xxl fw-900">
+                                    Let's Talk <span class="text-style-1"></span>
+                                </h1>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-8 col-lg-10 m-auto">
+                                            <div class="contact-from-area padding-20-row-col wow FadeInUp">
+
+
+                                                <form class="contact-form-style text-center" id="contact-form"
+                                                    action="/sendMessage" method="post">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <div class="input-style mb-20">
+                                                                <input name="name" placeholder="First Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <div class="input-style mb-20">
+                                                                <input name="email" placeholder="Your Email"
+                                                                    type="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <div class="input-style mb-20">
+                                                                <input name="telephone" placeholder="Your Phone"
+                                                                    type="tel">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <div class="input-style mb-20">
+                                                                <input name="subject" placeholder="Subject" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <div class="textarea-style mb-30">
+                                                                <textarea name="message"
+                                                                    placeholder="Message"></textarea>
+                                                                    <h4 id="contact message" style="color: red; font-weight: 400; font-family: Georgia, 'Times New Roman', Times, serif; background-color: white;" class="text-center"></h4>
+                                                            </div>
+                                                            
+                                                            <button class="submit submit-auto-width" type="submit">Send
+                                                                message</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+
+                                                <p class="form-messege"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- <section class="section-border pt-50 pb-50">
+            <div class="container">
+                <div id='map-panes' class="leaflet-map mb-50"></div>
+                <div class="row">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h4 class="mb-15 text-brand">Office</h4>
+                        205 North Michigan Avenue, Suite 810<br>
+                        Chicago, 60601, USA<br>
+                        <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                        <abbr title="Email">Email: </abbr><a href="http://wp.alithemes.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02616d6c766361764247746370632c616d6f">[email&#160;protected]</a><br>
+                        <a class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i class="fi-rs-marker mr-10"></i>View map</a>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <h4 class="mb-15 text-brand">Studio</h4>
+                        205 North Michigan Avenue, Suite 810<br>
+                        Chicago, 60601, USA<br>
+                        <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                        <abbr title="Email">Email: </abbr><a href="http://wp.alithemes.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27444849534644536762514655460944484a">[email&#160;protected]</a><br>
+                        <a class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i class="fi-rs-marker mr-10"></i>View map</a>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="mb-15 text-brand">Shop</h4>
+                        205 North Michigan Avenue, Suite 810<br>
+                        Chicago, 60601, USA<br>
+                        <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                        <abbr title="Email">Email: </abbr><a href="http://wp.alithemes.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a1adacb6a3a1b68287b4a3b0a3eca1adaf">[email&#160;protected]</a><br>
+                        <a class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up"> <i class="fi-rs-marker mr-10"></i> View map</a>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+            </main>
+            <%-include(".././../Layouts/userfooter.ejs")%>
+
+            <!-- Preloader Start -->
+            <!-- <div id="preloader-active">
+                <div class="preloader d-flex align-items-center justify-content-center">
+                    <div class="preloader-inner position-relative">
+                        <div class="text-center">
+                            <h5 class="mb-5">Now Loading</h5>
+                            <div class="loader">
+                                <div class="bar bar1"></div>
+                                <div class="bar bar2"></div>
+                                <div class="bar bar3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Vendor JS-->
+            <script data-cfasync="false"
+                src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+            <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+            <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+            <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+            <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/plugins/slick.js"></script>
+            <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+            <script src="assets/js/plugins/wow.js"></script>
+            <script src="assets/js/plugins/jquery-ui.js"></script>
+            <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+            <script src="assets/js/plugins/magnific-popup.js"></script>
+            <script src="assets/js/plugins/select2.min.js"></script>
+            <script src="assets/js/plugins/waypoints.js"></script>
+            <script src="assets/js/plugins/counterup.js"></script>
+            <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+            <script src="assets/js/plugins/images-loaded.js"></script>
+            <script src="assets/js/plugins/isotope.js"></script>
+            <script src="assets/js/plugins/scrollup.js"></script>
+            <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+            <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+            <script src="assets/js/plugins/leaflet.js"></script>
+            <!-- Template  JS -->
+            <script src="assets/js/main.js"></script>
+            
+            <script>
+
+
+                $(document).ready(function () {
+                    setTimeout(() => {
+                        document.getElementById('errormsg').innerText = ""
+                    }, 3000)
+
+                    // When the form is submitted
+                    $('#contact-form').submit(function (e) {
+                        // Prevent the default form submission behavior
+                        e.preventDefault();
+
+                        // Serialize the form data into a format that can be sent via AJAX
+                        var formData = $(this).serialize();
+
+                        // Send an AJAX request to the server
+                        $.ajax({
+                            type: 'POST',
+                            url: '/sendMessage', // Replace with the correct URL
+                            data: formData,
+                            success: function (response) {
+
+                             document.getElementById('contact message').innerText=response.message
+                             setTimeout(()=>{
+                                document.getElementById('contact message').innerText=""
+                             },3000)
+                            },
+                            error: function (error) {
+                                // Handle any errors that occur during the AJAX request
+                                console.error('Error:', error);
+                            }
+                        });
+                    });
+                });
+            </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/page-contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:06 GMT -->
+
+</html>

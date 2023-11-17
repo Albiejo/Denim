@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Report</title>
+  <!-- Add any necessary styles here -->
+</head>
+<body>
+    <h1>Denim Stores</h1>
+  <h1>Sales Report</h1>
+
+  <!-- Display sales data in a table or other format -->
+  <table class="table table-hover" id="salesReportTable">
+    <thead>
+        <tr style="color: black;font-weight: bolder;">
+            <th scope="col">Order Id</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date</th>
+            <th scope="col">Order status</th>
+            <th scope="col">Amount</th>
+            <th scope="col" class="text-end">Payment</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <div id="mydiv">
+        <%for(let i =0; i< Orderdata.length; i++){%>
+           
+        <tr >
+           
+            <td><%=Orderdata[i].orderId%></td>
+            <td><%=Orderdata[i].customerId.name%></td>
+            <td><%=Orderdata[i].customerId.email%></td>
+            <td><%=Orderdata[i].createdOn.toLocaleDateString()%></td>
+            <%if(Orderdata[i].status==="Delivered"){%>
+                <td style="color: green;font-weight: bolder"><%=Orderdata[i].status%></td>
+            <%}  else if(Orderdata[i].status==="Pending"){%>
+                <td style="color: blue;font-weight: bolder"><%=Orderdata[i].status%></td>
+            <%} else{%>
+                <td style="color: red;font-weight: bolder;"><%=Orderdata[i].status%></td>
+            <%}%>
+            <td>₹<%=Orderdata[i].totalAmount%></td>
+            <td><%=Orderdata[i].paymentMethod%></td>
+        </tr>
+       
+    <%}%>
+</div>
+    </tbody>
+</table>
+</body>
+</html>

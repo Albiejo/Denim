@@ -1,0 +1,174 @@
+<%-include(".././../Layouts/adminhead.ejs")%>
+<section class="content-main">
+    <div class="row">
+<div class="col-9">
+    <div class="content-header">
+        <h2 class="content-title">Add New Product</h2>
+    </div>
+    <%if(typeof message !=="undefined"){%>
+        <h5 style="color:red" id="errormsg"><%=message%></h5>
+      <%}%>
+</div>
+<div class="col-lg-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Basic</h4>
+        </div>
+        <div class="card-body">
+
+<form method="post" id="formData" action="/admin/addproducts" onsubmit="return checkFormValidity()" enctype="multipart/form-data">
+
+    <div class="mb-4">
+        <label for="product_name" class="form-label">Product title</label>
+        <input type="text" placeholder="Type here" class="form-control" id="pname"
+            name="product_name" >
+        <div id="pnameValidationMessage" style="color: red;"></div>
+    </div>
+
+
+    <div class="mb-4">
+        <label class="form-label">Product description</label>
+        <input placeholder="Type here" class="form-control" 
+            name="discription" id="disc"></textarea>
+        <div id="discValidationMessage" style="color: red;"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="mb-4">
+                <label class="form-label" >Regular price</label>
+                <div class="row gx-2">
+                    <input placeholder="₹" type="number" class="form-control" name="regprice" id="regprice">
+                    <div id="regpValidationMessage" style="color: red;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="mb-4">
+                <label class="form-label">Offer price</label>
+                <input placeholder="₹" type="text" class="form-control" name="offerprice" id="offerprice">
+                <div id="ofpValidationMessage" style="color: red;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="mb-4">
+                <label class="form-label">Size</label>
+                <input placeholder="enter sizes" type="text" class="form-control"
+                    name="Size" id="size">
+                <div id="sizeValidationMessage" style="color: red;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mb-4">
+                <label class="form-label">Stock</label>
+                <input placeholder="Enter stock" type="number" class="form-control"
+                    name="stock" id="stock">
+                <div id="stockValidationMessage" style="color: red;"></div>
+                <br>
+
+                <label>
+                    <input type="radio" name="gender" value="male" class="genderradio">
+                    For Male
+                </label>
+                <br>
+                <br>
+                <label>
+                    <input type="radio" name="gender" value="female" class="genderradio">
+                    For Female
+                </label>
+                <div id="errorgender" style="color: red;"></div>
+            </div>
+        </div>
+    </div> 
+</div>
+</div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Brand and Category</h4>
+        </div>
+        <div class="card-body">
+            <div class="row gx-2">
+                <div class="col-sm-6 mb-3">
+                    <label class="form-label">Brand</label>
+                    <select class="form-select" name="brandSelect" required>
+                        <%for(let i=0; i< brandData.length; i++){%>
+                        <option><%=brandData[i].brandName%></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div> <!-- row.// -->
+            <div class="col-sm-6 mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select" name="categorySelect" required>
+                    <%for(let i=0; i< categoryData.length; i++){%>
+                        <option><%=categoryData[i].categoryName%></option>
+                        <% } %>
+                </select>
+            </div>
+
+            <label for="acive">LIST</label>
+            <input type="radio" id="acive" name="status" value="true" class="status-radio">
+            &nbsp &nbsp &nbsp
+            <label for="notActive">UNLIST</label>
+            <input type="radio" id="notActive" name="status" value="false" class="status-radio">
+            <div id="errorlist" style="color: red;"></div>
+        </div>
+    </div> 
+</div>
+
+
+    <div class="col-lg-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Media</h4>
+            </div>
+            <div class="card-body">
+                <div class="input-upload">
+                    <img src="/admin-assets/imgs/theme/upload.svg" alt="">
+                    <input class="form-control" type="file" id="image" name="image" multiple onchange="previewImages(event)"                                                >
+                </div>
+                <div id="image-preview-container"></div>
+                <div id="errorimage" style="color: red;"></div>
+            </div>
+
+        </div> <!-- card end// -->
+        <div>
+            <button type="submit" class="btn btn-md rounded font-sm hover-up">PUBLISH PRODUCT</button>
+        </div>
+    </div>
+</div>
+</section>
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> ©, Denim Stores .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/admin-assets/js/validation.js"></script>
+    <script src="/admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/admin-assets/js/vendors/select2.min.js"></script>
+    <script src="/admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/admin-assets/js/main.js" type="text/javascript"></script>
+
+  
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
+
+</html>

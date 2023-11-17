@@ -1,0 +1,387 @@
+<%-include(".././../Layouts/userheader.ejs")%>
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/loginhomepage" rel="nofollow">Home</a>
+                    <span></span> Shop
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row flex-row-reverse">
+                    <div class="col-lg-9">
+                        <div class="shop-product-fillter style-2">
+
+                            <div class="sort-by-product-area">
+                                <div class="sort-by-cover">
+                                    <div class="sort-by-product-wrap">
+                                        <div class="sort-by">
+                                            <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
+                                        </div>
+                                        <div class="sort-by-dropdown-wrap">
+                                            <span id="sort-dropdown">price<i class="fi-rs-angle-small-down"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="sort-by-dropdown">
+                                        <ul>
+                                            <li><a class="sort-option" data-sort="low-to-high" href="#">Price: Low to High</a></li>
+                                            <li><a class="sort-option" data-sort="high-to-low" href="#">Price: High to Low</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!--sorting products here -->
+                       
+                        <div class="product-list mb-50"  id="search-results-container">
+                            <%if(typeof message !=="undefined"){%>
+                                <h5 style="color:red" id="errormsg"><%=message%></h5>
+                              <%}%>
+
+                            <%for(let i=0; i< searchResults.length; i++){%>
+                                <div class="product-cart-wrap">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <div class="product-img-inner">
+                                                <a href="/productview?id=<%=searchResults[i]._id %>">
+                                                    <img class="default-img"
+                                                        src="/cloud_images/<%=searchResults[i].images[0].url%>" alt="">
+                                                    <img class="hover-img"
+                                                        src="/cloud_images/<%=searchResults[i].images[2].url%>" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <%if(searchResults[i].stock>0){%>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="sale">SALE</span>
+                                            </div>
+                                            <%}else{%>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="sale">OUT OF STOCK</span>
+                                                </div>
+                                            <%}%>
+                                    </div>
+
+                                    <div class="product-content-wrap">
+
+                                        <h2><a href="/productview?id=<%=searchResults[i]._id %>">
+                                                <%=searchResults[i].productName%>
+                                            </a></h2>
+                                        <div class="product-category">
+                                            <span>
+                                                <%=searchResults[i].category%>
+                                            </span>
+                                        </div>
+                                        <span style="font-weight:bolder">Brand : <%=searchResults[i].brand%></span>
+
+                                        <div class="product-price">
+                                            <span>$<%=searchResults[i].offerPrice%></span>
+                                            <br>
+                                            <span class="old-price">$<%=searchResults[i].regularPrice%></span>
+                                        </div>
+
+                                        <div class="product-action-1 show">
+                                            <a aria-label="Add now" class="action-btn addwnow"
+                                                data-item-id="<%=searchResults[i]._id%>"><i class="fi-rs-heart"></i>Add to
+                                                Wishlist</a>
+                                            <div class="rating-result" title="90%">
+                                                <span>
+                                                    <span>90%</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                        </div>
+
+
+
+
+
+
+
+                        <!--pagination-->
+                        <!-- <div class="pagination-area mt-15 mb-sm-5 mb-lg-12"> -->
+                            <div class="row d-flex justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    <a href="/search?query=<%=searchQuery%>&sort=<%=sort%>&page=<%= currentPage - 1 %>" class="btn btn-primary">Previous</a>
+                            
+                                    Page <%= currentPage %> of <%= totalPages %>
+                            
+                                    <% if (currentPage < totalPages) { %>
+                                        <a href="/search?query=<%=searchQuery%>&sort=<%=sort%>&page=<%= currentPage + 1 %>" class="btn btn-primary">Next</a>
+                                    <% } %>
+                                </nav>
+                            </div>
+                            
+                            
+                            
+
+                    </div>
+                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                      
+                        <!-- Fillter By Price -->
+                        <div class="sidebar-widget price_range range mb-30">
+                           
+                            <div class="price-filter">
+                                <!-- <div class="price-filter-inner">
+                                    <div id="slider-range"></div>
+                                    <div class="price_slider_amount">
+                                        <div class="label-input">
+                                            <span>Range:</span><input type="text" id="amount" name="price"
+                                                placeholder="Add Your Price" />
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="widget-category">
+                                    <h5 class="section-title style-1 wow fadeIn animated">Category</h5>
+            
+                                    <ul class="categories" style="font-weight: bolder;">
+                                        <%for(let i=0;i< categoryData.length;i++){%>
+                                            <li><a href="/categoryfilter?categoryName=<%=categoryData[i].categoryName%>">
+                                                <%=categoryData[i].categoryName%>
+                                                </a></li>
+                                        <%}%>
+                                    </ul>
+                               </div>
+                            </div>
+                            <div class="list-group">
+                                <!-- <div class="list-group-item mb-10 mt-10">
+                                    <label class="fw-900">Color</label>
+                                    <div class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox1" value="">
+                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red
+                                                (56)</span></label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox2" value="">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green
+                                                (78)</span></label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox3" value="">
+                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue
+                                                (54)</span></label>
+                                    </div>
+                                    <label class="fw-900 mt-15">Item Condition</label>
+                                    <div class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox11" value="">
+                                        <label class="form-check-label" for="exampleCheckbox11"><span>New
+                                                (1506)</span></label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox21" value="">
+                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
+                                                (27)</span></label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox31" value="">
+                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used
+                                                (45)</span></label>
+                                    </div>
+                                </div> -->
+                                <div class="sort-by-product-area">
+                                    <div class="sort-by-cover">
+                                        <div class="sort-by-product-wrap">
+                                            <div class="sort-by">
+                                                <span><i class="fi-rs-apps-sort"></i>Sort by Price</span>
+                                            </div>
+                                        </div><br>
+                                    </div>
+                                    <a href="/search?query=<%=searchQuery%>&sort=1"><button>Low to high</button></a>
+                                    <a href="/search?query=<%=searchQuery%>&sort=-1"><button>High to low</button></a>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+
+
+                     
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <%-include(".././../Layouts/userfooter.ejs")%>
+
+    <!-- Preloader Start -->
+    <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading..</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="assets/js/plugins/jquery.elevatezoom.js"></script>
+    <!-- Template  JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+
+    <script>
+     
+        const wishlistModal = document.getElementById("wishlistModal");
+        const wishlistMessage = document.getElementById("wishlistMessage");
+        const closeModal = document.getElementById("closeModal");
+
+
+        $(document).ready(function () {
+
+            $('.addwnow').on('click', function () {
+                let product_id = $(this).data('item-id');
+
+                $.ajax({
+                    url: '/addtowishlist',
+                    method: 'POST',
+                    data: { product_id: product_id },
+                    success: function (msg) {
+                        wishlistMessage.innerText = msg.message;
+                        wishlistModal.style.display = "block";
+                        document.getElementById('wishlistcount').innerText=msg.count
+
+
+                        setTimeout(function () {
+                            wishlistModal.style.display = "none";
+                        }, 3000);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            closeModal.addEventListener("click", function () {
+                wishlistModal.style.display = "none";
+            });
+     
+
+
+    $(".sort-option").on("click", function (e) {
+        e.preventDefault();
+        const sortOption = $(this).data("sort"); // Retrieve the sort option
+
+        // Make an AJAX request to the server
+        $.ajax({
+            type: "GET",
+            url: "/sort-products",
+            data: { sort: sortOption }, // Send the selected sorting option to the server
+            success: function (response) {
+                if (response.products && response.products.length > 0) {
+                    response.products.forEach(function (product) {
+                    const productItem = `
+        <div class="product-cart-wrap">
+            <div class="product-img-action-wrap">
+                <div class="product-img product-img-zoom">
+                    <div class="product-img-inner">
+                        <a href="/productview?id=${product._id}">
+                            <img class="default-img" src="/cloud_images/${product.images[0].url}" alt="">
+                            <img class="hover-img" src="/cloud_images/${product.images[2].url}" alt="">
+                        </a>
+                    </div>
+                </div>
+                ${product.stock > 0 ?
+                    `<div class="product-badges product-badges-position product-badges-mrg">
+                        <span class="sale">SALE</span>
+                    </div>` :
+                    `<div class="product-badges product-badges-position product-badges-mrg">
+                        <span class="sale">OUT OF STOCK</span>
+                    </div>`
+                }
+            </div>
+            <div class="product-content-wrap">
+                <h2><a href="/productview?id=${product._id}">${product.productName}</a></h2>
+                <div class="product-category">
+                    <span>${product.category}</span>
+                </div>
+                <span style="font-weight: bold">Brand: ${product.brand}</span>
+                <div class="product-price">
+                    <span>$${product.offerPrice}</span>
+                    <br>
+                    <span class="old-price">$${product.regularPrice}</span>
+                </div>
+                <div class="product-action-1 show">
+                    <a aria-label="Add now" class="action-btn addwnow" data-item-id="${product._id}">
+                        <i class="fi-rs-heart"></i>Add to Wishlist
+                    </a>
+                    <div class="rating-result" title="90%">
+                        <span>
+                            <span>90%</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    $('#product-list').append(productItem);
+                    console.log('Product item:', productItem);
+                });
+                
+            } else{
+                // Handle case when there are no search results
+                $('#product-list').append('<p>No results found.</p>');
+            }
+        },
+            error: function(error) {
+                console.log('Sort error: ' + error);
+            }
+        });
+    });
+
+
+    $(document).on("click", ".sort-option", function(e) {
+    e.preventDefault();
+    const selectedOption = $(this).text();
+    
+    // Set the dropdown text to the selected option
+    $("#sort-dropdown").text(selectedOption);
+    
+    // Toggle the dropdown
+    $(".sort-by-dropdown ul").slideToggle();
+});
+
+});
+
+    </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/shop-list-left.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:43 GMT -->
+
+</html>

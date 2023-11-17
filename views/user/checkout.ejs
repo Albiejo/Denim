@@ -1,0 +1,555 @@
+<%-include(".././../Layouts/userheader.ejs")%>
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/loginhomepage" rel="nofollow">Home</a>
+                    <span></span> Shop
+                    <span></span> Checkout
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mb-sm-15">
+                        <div class="toggle_info">
+                            <span><i class="fi-rs-user mr-10"></i><span class="text-muted">want to add new address ?</span> <a href="#loginform" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to add</a></span>
+                        </div>
+
+                        <div class="panel-collapse collapse login_form" id="loginform">
+                            <div class="panel-body">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Add new address to your profile</h5>
+                                    </div>
+                                    <div class="card-body">
+        
+                                                <form method="post" name="enq" action="/addnewaddressfromcheckout" onsubmit="return checkFormValidity()">
+                                                    <%if (typeof message !=='undefined' ) {%>
+                                                        <p style="color:red;">
+                                                            <%=locals.message %>
+                                                        </p>
+                                                        <%}%>
+            
+
+
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12">
+                                                            <label>name<span class="required">*</span></label>
+                                                            <input  class="form-control square" name="name" type="text" id="name">
+                                                            <div id="nameerror" style="color: red;"></div>
+
+
+
+                                                            <label>House name<span class="required">*</span></label>
+                                                            <input  class="form-control square" name="House-name" type="text" id="housename">
+                                                            <div id="houseerror" style="color: red;"></div>
+
+
+
+                                                            <label>Street<span class="required">*</span></label>
+                                                            <input  class="form-control square" name="Street-name" type="text" id="streetname">
+                                                            <div id="streeterror" style="color: red;"></div>
+
+
+
+                                                            <label>Pincode<span class="required">*</span></label>
+                                                            <input  class="form-control square" name="Pincode" type="number" id="pincode">
+                                                            <div id="pincodeerror" style="color: red;"></div>
+
+                    
+                                                            
+                                                            <label>Country<span class="required">*</span></label>                          
+                                                            <input  class="form-control square"name="Country" type="text" id="country">
+                                                            <div id="countryerror" style="color: red;"></div>
+
+
+
+                                                            <label>Phone<span class="required">*</span></label>
+                                                            <input  class="form-control square" name="Phone" type="number" id="phone">
+                                                            <div id="phoneerror" style="color: red;"></div>
+
+                     
+                     
+                                                            <input type="hidden" name="userId" value="<%=userData._id%>">
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Add to profile</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="toggle_info">
+                            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
+                        </div>
+                        <div class="panel-collapse collapse coupon_form " id="coupon">
+                            <div class="panel-body">
+                                <p class="mb-30 font-sm">If you have a coupon code, please apply it below.</p>
+                                    <div class="form-group">
+                                        <input type="text" name="couponCode" id="couponCode" placeholder="Enter Coupon Code...">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn  btn-md" name="applyCoupon" id="applyCoupon">Apply Coupon</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="divider mt-50 mb-50"></div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-25">
+                            <h4>Billing Details</h4>
+                        </div>
+                        <%if(userData.Address.length===0){%>
+                            <p style="color: red; font-weight: 300;">No addresses added yet !</p>
+                        <%}%>
+
+                        <%if(typeof message !=="undefined"){%>
+                            <h5 style="color:red" id="addressmsg"><%=message%></h5>
+                          <%}%><br>
+
+
+
+
+                     <!--place order form starts here -->
+            <form method="post" action="/orderconfirm" id="placeorderform">
+
+                        <%for(let i=0; i< userData.Address.length; i++){%>
+                        
+                        <div class="col-lg-6">
+                            <div class="card mb-3 mb-lg-0">
+                                <div class="card-header">
+                                    <input class="form-check-input" type="radio" checked name="address" id="address" value="<%=userData.Address[i]._id%>" >
+                                    <h5 class="mb-0">Address #<%=i+1%></h5>
+                                </div>
+                                <div class="card-body">
+                                 
+                                   <p><%=userData.Address[i].Name%></p>
+                                   
+                                 
+                                   <p><%=userData.Address[i].Housename%></p>
+                                  
+                                   <p><%=userData.Address[i].Street%></p>
+                                   
+                                   <p><%=userData.Address[i].Pincode%></p>
+                                  
+                                   <p><%=userData.Address[i].Country%></p>
+                                  
+                                   <p><%=userData.Address[i].Phone%></p>
+                                   <br>                                 
+                                    <a href="/editprofileaddressfromcheckout?addressId=<%=userData.Address[i]._id%>" class="btn-small edit-button btn" >Edit</a>
+                                    
+                               </div>
+                            </div>
+                        </div>
+                   
+                        <%}%>
+                    </div>
+
+                    <div class="col-md-6" style="border: 1px solid;">
+                        <div class="order_review">
+                            <div class="mb-20">
+                                <h4>Your Orders</h4><br>
+                                <%if(typeof pmessage !=="undefined"){%>
+                                    <h4 style="color:red" id="errormsg"><%=pmessage%></h4>
+                                  <%}%>
+                            </div>
+                            <div class="table-responsive order_table text-center">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%for(let i=0; i< productsInCart.length; i++){%>
+                                        <tr>
+                                            <td class="image product-thumbnail"><img src="/cloud_images/<%=productsInCart[i].images[0].url%>"  alt="#"></td>
+                                            <td>
+                                                <h5><a href="shop-product-full.html"> <%=productsInCart[i].productName%></a></h5> <span class="product-qty">x <%=userData.cart[i].quantity%></span>
+                                            </td>
+                                            <td>₹<%=productsInCart[i].offerPrice%></td>
+                                        </tr>
+                                        <%}%>
+                                        <tr>
+                                            <th>SubTotal</th>
+                                            <td class="product-subtotal" colspan="2">₹<%=userData.CartTotal%></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping</th>
+                                            <td colspan="2"><em>Free Shipping</em></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Discount</th>
+                                            <td colspan="2" id="discount"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td colspan="2" class="product-subtotal" id="product-grandtotal"><span class="font-xl text-brand fw-900">₹ <%=userData.CartTotal%></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                            <div class="payment_method">
+                                <div class="mb-25">
+                                    <h5>Payment</h5>
+                                </div>
+                                <div class="payment_option">
+                                    <div class="custome-radio">
+                                        <input class="form-check-input"  type="radio" name="payment_option" id="exampleRadios3" value="Cash On Delivery" checked>
+                                        <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Cash On Delivery</label><br>
+                                        <input class="form-check-input"  type="radio" name="payment_option" id="exampleRadios4" value="Razorpay" >
+                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Razorpay</label>
+                                    </div>
+                                 </div>
+                            </div>
+                            <input type="hidden" name="customerdata" value="<%= JSON.stringify(userData) %>">
+                            <input type="hidden" name="itemdata" value="<%=JSON.stringify(item)%>">
+                            <button class="btn btn-fill-out btn-block mt-30" type="submit" <%if(productsInCart.length<1){%> disabled <%}%> >Place Order</button>
+                        </div>
+                    </div>
+                </form>
+                <!--place order form ends here -->
+
+
+
+
+
+                
+                </div>
+            </div>
+        </section>
+    </main>
+    <%-include(".././../Layouts/userfooter.ejs")%>
+
+    <!-- Preloader Start -->
+    <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center">
+                    <h5 class="mb-5">Now Loading</h5>
+                    <div class="loader">
+                        <div class="bar bar1"></div>
+                        <div class="bar bar2"></div>
+                        <div class="bar bar3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <!-- Template  JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+          const phoneinput = document.getElementById('phone')
+        const countryinput = document.getElementById('country')
+        const pincodeinput = document.getElementById('pincode')
+        const streetnameinput = document.getElementById('streetname')
+        const housenameinput = document.getElementById('housename')
+        const nameinput = document.getElementById('name')
+        
+
+        const namemessage=document.getElementById('nameerror')
+        const housemessage=document.getElementById('houseerror')
+        const streetmessage=document.getElementById('streeterror')
+        const pincodemessage=document.getElementById('pincodeerror')
+        const countrymessage=document.getElementById('countryerror')
+        const phonemessage=document.getElementById('phoneerror')
+
+        const nameRegex = /^[A-Za-z\s]{2,}$/;
+        const phoneregex=/^[1-9]\d{9}$/;
+        
+
+        phoneinput.addEventListener('input',()=>{
+            const phone=phoneinput.value
+            const isValid = validatephone(phone);
+        })
+        countryinput.addEventListener('input',()=>{
+            const country=countryinput.value
+            const isValid = validatecountry(country);
+        })
+        pincodeinput.addEventListener('input',()=>{
+            const pincode=pincodeinput.value
+            const isValid = validatepincode(pincode);
+        })
+        streetnameinput.addEventListener('input',()=>{
+            const street=streetnameinput.value
+            const isValid = validatestreet(street);
+        })
+        housenameinput.addEventListener('input',()=>{
+            const house=housenameinput.value
+            const isValid = validatehouse(house);
+        })
+        nameinput.addEventListener('input',()=>{
+            const name=nameinput.value
+            const isValid = validatename(name);
+        })
+
+
+        function validatephone(phone){
+            if (phone.trim().length < 1) {
+                phonemessage.textContent = "Phone cannot be empty"
+                return false
+            }
+            if (!phoneregex.test(phone.trim())) {
+                phonemessage.textContent = "Enter a valid Phone number"
+                return false
+            }
+            phonemessage.textContent = ""
+            return true
+        }
+
+
+        function validatecountry(country){
+            if(country.trim().length < 1) {
+                countrymessage.textContent = "Country cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(country.trim())) {
+                countrymessage.textContent = "Country cannot be a number"
+                return false
+            }
+            countrymessage.textContent = ""
+            return true
+        }
+        
+
+        function validatepincode(pincode){
+            if (pincode.trim().length < 1) {
+                pincodemessage.textContent = "pincode cannot be empty"
+                return false
+            }
+            pincodemessage.textContent = ""
+            return true
+        }
+
+        function  validatestreet(street){
+            if (street.trim().length < 1) {
+                streetmessage.textContent = "Street name cannot be empty"
+                return false
+            }
+            streetmessage.textContent = ""
+            return true
+        }
+        
+
+        function validatehouse(house){
+            if (house.trim().length < 1) {
+                housemessage.textContent = "House name cannot be empty"
+                return false
+            }
+            housemessage.textContent = ""
+            return true
+        }
+
+
+        function validatename(name){
+            if (name.trim().length < 1) {
+                namemessage.textContent = "name cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                namemessage.textContent = "Name cannot be a number"
+                return false
+            }
+
+            namemessage.textContent = ""
+            return true
+        }
+
+
+        function checkFormValidity() {
+            let nameIsValid = validatename(nameinput.value);
+            let HouseIsValid = validatehouse(housenameinput.value);
+            let StreetIsValid = validatestreet(streetnameinput.value);
+            let pincodeIsValid = validatepincode(pincodeinput.value);
+            let countryIsValid = validatecountry(countryinput.value);
+            let phoneIsValid = validatephone(phoneinput.value);
+          
+
+            if (nameIsValid && HouseIsValid && StreetIsValid && pincodeIsValid && countryIsValid && phoneIsValid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        document.getElementById('applyCoupon').addEventListener('click',function(events){
+            events.preventDefault()
+            var couponCode= document.getElementById('couponCode').value 
+            $.ajax({
+                url:"/applyCoupon",
+                method:'POST',
+                data:{ code:couponCode , cartTotal:'<%=userData.CartTotal%>'},
+                success: (response) => {
+    if (response.grandTotal) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Coupon applied',
+            text: 'Your coupon has been applied successfully.',
+        });
+        document.getElementById('product-grandtotal').innerHTML = response.grandTotal;
+        document.getElementById('discount').innerHTML = response.discount;
+    }
+    if (response.minimumvalid) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Coupon Minimum Not Met',
+            text: response.minimumvalid,
+        });
+    }
+    if (response.expiry) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Coupon Expired',
+            text: response.expiry,
+        });
+    }
+    if (response.noCoupon) {
+        Swal.fire({
+            icon: 'error',
+            title: 'No Coupon Applied',
+            text: response.noCoupon,
+        });
+    } 
+    if (response.alreadyUsed) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Coupon Invalid',
+            text: response.alreadyUsed,
+        });
+    }
+}
+
+            })
+        })
+
+
+
+    $(document).ready(function() {
+    $("#placeorderform").submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send an AJAX request to the server
+        $.ajax({
+            type: "POST",
+            url: "/orderconfirm", // Update the URL to the correct server route
+            data: formData,
+            success: function(response) {
+                if(response.noaddress){
+                    alert(response.noaddress)
+                }
+                if (response.codsucess) {
+                         window.location.href = '/orderconfirmation';
+                }else{
+                    razorPayment(response)
+                }
+
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+
+        function verifyPayment(payment , order){
+            $.ajax({
+                url:'/verify-payment',
+                data:{
+                    payment,order
+                },
+                method:'POST',
+                success:(response)=>{
+                    console.log("reached here in client side ")
+                    if(response.orderid){
+                        window.location.href = '/orderconfirmation';
+                    }
+                },
+                error:(error)=>{
+                    if(error){
+                       alert(error)
+                    }
+                }
+            })
+        };
+       
+
+      
+ 
+        
+        function razorPayment(order){
+            var options = {
+                "key": "rzp_test_76Sj5AYZSJlhWw", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Denim Store",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    verifyPayment( JSON.stringify(response) , JSON.stringify(order) )
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    });
+});
+
+    </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-frontend/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:26:06 GMT -->
+</html>

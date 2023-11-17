@@ -1,0 +1,269 @@
+<%-include(".././../Layouts/adminhead.ejs")%>
+
+
+
+
+<section class="content-main">
+    <div class="content-header">
+        <div class="col-lg-6">
+            <h2 class="content-title card-title">Sales Report</h2>
+        </div>
+        <div class="col-lg-3">
+
+        </div>
+        <div class="col-lg-3">
+<!-- <button class="btn btn-primary">Download</button> -->
+        </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header">
+            <div class="row gx-3">
+                <form method="post">
+                <div class="col-lg-4 col-6 col-md-3">
+                    <select class="form-select" id="customReport" name="deliverystatus">
+                        <option value="Show all">Show all</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="pending">Pending</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                
+                <div class="col-lg-4">
+                    <label style="color: black; font-weight: bold;">Start Date</label>
+                    <input type="date" id="date1" name="startdate" class="form-control" style="height: calc(1.5em + 0.75rem + 2px); border-radius: 0.25rem;">
+                    
+                    <label style="color: black; font-weight: bold;">End Date</label>
+                    <input type="date" id="date2" name="enddate" class="form-control" style="height: calc(1.5em + 0.75rem + 2px); border-radius: 0.25rem;">
+                
+                    <button id="filterSalesBtn" class="btn btn-primary mt-3" type="submit">Filter Sales</button>
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </form>
+            <a href='/admin/getreport?startdate=<%=startdate%>&enddate=<%=enddate%>&deliverystatus=<%=deliverystatus%>'><button class="btn btn-primary mt-3" style="margin-left: 70%;">Download report</button></a>
+            </div>
+        </header>
+       
+        <div class="card-body">
+            <div class="table-responsive">
+                <p id="smessage"></p>
+                <table class="table table-hover" id="salesReportTable">
+                    <thead>
+                        <tr style="color: black;font-weight: bolder;">
+                            <th scope="col">Order Id</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Order status</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col" class="text-end">Payment</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div id="orderList">
+                          
+                        </div>
+
+                        <div id="mydiv">
+                        <%for(let i =0; i< Orderdata.length; i++){%>
+                           
+                        <tr >
+                           
+                            <td><%=Orderdata[i].orderId%></td>
+                            <td><%=Orderdata[i].customerId.name%></td>
+                            <td><%=Orderdata[i].customerId.email%></td>
+                            <td><%=Orderdata[i].createdOn.toLocaleDateString()%></td>
+                            <%if(Orderdata[i].status==="Delivered"){%>
+                                <td style="color: green;font-weight: bolder"><%=Orderdata[i].status%></td>
+                            <%}  else if(Orderdata[i].status==="Pending"){%>
+                                <td style="color: blue;font-weight: bolder"><%=Orderdata[i].status%></td>
+                            <%} else{%>
+                                <td style="color: red;font-weight: bolder;"><%=Orderdata[i].status%></td>
+                            <%}%>
+                            <td>₹<%=Orderdata[i].totalAmount%></td>
+                            <td><%=Orderdata[i].paymentMethod%></td>
+                        </tr>
+                       
+                    <%}%>
+                </div>
+                    </tbody>
+                </table>
+            </div> <!-- table-responsive //end -->
+        </div> <!-- card-body end// -->
+    </div> <!-- card end// -->
+    
+    <div class="pagination">
+        <ul class="pagination">
+            <% if (currentPage > 1) { %>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<%= previousPage %>">Previous</a>
+                </li>
+            <% } %>
+            <% for (let i = 1; i <= lastPage; i++) { %>
+                <li class="page-item <% if (i === currentPage) { %>active<% } %>">
+                    <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                </li>&nbsp;&nbsp;&nbsp;
+            <% } %>
+            <% if (currentPage < lastPage) { %>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<%= nextPage %>">Next</a>
+                </li>&nbsp;&nbsp;&nbsp;
+            <% } %>
+        </ul>
+    </div>
+
+
+</div>
+</div>
+</section>
+
+
+
+
+
+<footer class="main-footer font-xs">
+    <div class="row pb-30 pt-15">
+        <div class="col-sm-6">
+            <script>
+            document.write(new Date().getFullYear())
+            </script> ©, Denim Stores  .
+        </div>
+        <div class="col-sm-6">
+            <div class="text-sm-end">
+                All rights reserved
+            </div>
+        </div>
+    </div>
+</footer>
+</main>
+<script src="admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="admin-assets/js/vendors/select2.min.js"></script>
+<script src="admin-assets/js/vendors/perfect-scrollbar.js"></script>
+<script src="admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+<script src="admin-assets/js/vendors/chart.js"></script>
+<!-- Main Script -->
+<script src="admin-assets/js/main.js" type="text/javascript"></script>
+<script src="admin-assets/js/custom-chart.js" type="text/javascript"></script>
+
+<script>
+   
+
+
+//    $(document).ready(function () {
+//         // Add an event listener to the select element
+//         $('#customReport').change(function () {
+//             // Get the selected value
+//             var selectedStatus = $(this).val();
+//             // Send an AJAX request to the server
+//             $.ajax({
+//                 url: '/admin/updatesalesreport', // Make sure this path is correct
+//                 type: 'GET',
+//                 data: { status: selectedStatus },
+//                 success: function (response) {
+    
+//                 // var salesData = response.filteredSales;
+//                 // var startDate = new Date(response.startDate);
+//                 // var endDate = new Date(response.endDate);
+
+//                 $('#salesReportTable tbody').html('');
+
+//                 response.forEach(sales => {
+//                 const row = $('<tr>');
+//                 row.html(`
+//                     <td>${sales.orderId}</td>
+//                     <td><b>${sales.customerId.name}</b></td>
+//                     <td>${sales.customerId.email}</td>
+//                     <td>${sales.createdOn}</td>
+//                     <td>
+//                     <span class="badge rounded-pill alert-warning">${sales.status}</span>
+//                     </td>
+//                     <td>₹${sales.totalAmount}</td>
+//                     <td class="text-end">${sales.paymentMethod}</td>
+//                 `);
+
+//                 // Append the new row to the table body
+//                 $('#salesReportTable tbody').append(row);
+//                 });
+
+//                 // Now you can use 'startDate' and 'endDate' as needed
+
+//             },
+//             error: function (error) {
+//                 console.log(error);
+//             }
+//             });
+//         });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//date filtering 
+    $('#filterSalesBtn').click(function () {
+        var startDate = $('#date1').val();
+        var endDate = $('#date2').val();
+        getFilteredSales(startDate, endDate);
+    });
+});
+
+function getFilteredSales(startDate, endDate) {
+    $.ajax({
+        type: 'POST',
+        url: '/admin/filterSales',
+        data: { startDate: startDate, endDate: endDate },
+        success: function (data) {
+
+            // Clear existing table rows
+            $('#salesReportTable tbody').html('');
+            // Append new rows to the table body
+            data.forEach(sales => {
+                const row = $('<tr>');
+                row.html(`
+                    <td>${sales.orderId}</td>
+                    <td><b>${sales.customerId.name}</b></td>
+                    <td>${sales.customerId.email}</td>
+                    <td>${sales.createdOn}</td>
+                    <td>
+                        <span class="badge rounded-pill alert-warning">${sales.status}</span>
+                    </td>
+                    <td>₹${sales.totalAmount}</td>
+                    <td class="text-end">${sales.paymentMethod}</td>
+                `);
+
+                // Append the new row to the table body
+                $('#salesReportTable tbody').append(row);
+            });
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+    
+}
+
+</script>
+</body>
+
+</html>

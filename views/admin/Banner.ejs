@@ -1,0 +1,323 @@
+<%-include(".././../Layouts/adminhead.ejs")%>
+
+<section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Add new Banner</h2>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card mb-4">
+               
+                <div class="card-body">
+                    <form action="/admin/banner" method="post" onsubmit="return checkCoupon()" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <div class="row">
+                                <br>
+                                <div class="col-lg-4" >
+                                    <div class="mb-4" >
+                                        <label class="form-label">Main heading</label>
+                                        <input type="text" class="form-control"  name="h1"  style="background-color: rgb(211, 204, 204);" id="h1">
+                                        <div id="errorh1" style="color: red;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Sub head 1</label>
+                                        <input type="text" class="form-control"name="h2" id="h2"  style="background-color: rgb(211, 204, 204);">
+                                        <div id="errorh2" style="color: red;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Sub head 2</label>
+                                        <input type="text" class="form-control"  name="h3" id="h3"  style="background-color: rgb(211, 204, 204);">
+                                        <div id="errorh3" style="color: red;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Sub head 3</label>
+                                        <input type="text" class="form-control"  name="p1" id="p1"  style="background-color: rgb(211, 204, 204);">
+                                        <div id="errorp1" style="color: red;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4" >
+                                    <div class="mb-4" >
+                                        <label class="form-label">Discription</label>
+                                        <input type="text" class="form-control"   name="discription"  style="background-color: rgb(211, 204, 204);" id="cdisc">
+                                        <div id="errordisc" style="color: red;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4" >
+                                    <div class="mb-4" >
+                                        <div class="input-upload">
+                                            <img src="/admin-assets/imgs/theme/upload.svg" alt="">
+                                            <input class="form-control form-control-lg" type="file" name="image">                                                
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="text-muted material-icons md-post_add"></i>Publish Banner</button>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- card end// -->
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>BANNER DETAILS</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(let i=0; i< bannerData.length; i++){%>
+                                    <tr>
+                                        <td>
+                                           <span style="color: black; font-weight: bolder;"><%=i+1%></span> 
+                                        </td>
+
+                                        <td class="image product-thumbnail">
+                                            <img src="/BannerImages/<%=bannerData[i].Image%>" alt="Banner Image" class="card-img-top">
+                                        </td>
+                                        <td>
+                                            <span style="color: black; font-weight: bolder;"><%=bannerData[i].h1%><br><%=bannerData[i].h2%><br></span> 
+                                        </td>
+                                        <td>
+                                            <span style="color: green; font-weight: bolder" id="statusspan<%= bannerData[i]._id %>" data-banner-id="<%= bannerData[i]._id %>"><%=bannerData[i].status%></span>  
+                                        </td>
+                                        <td>
+                                          <button onclick="Changestatus('<%=bannerData[i]._id%>')" class="btn-success btn-md">Change Status</button>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/deleteBanner?id=<%=bannerData[i]._id%>"><button class="btn-danger btn-md">delete</button></a>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Denim Stores  .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="admin-assets/js/vendors/select2.min.js"></script>
+    <script src="admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="admin-assets/js/vendors/chart.js"></script>
+    <!-- Main Script -->
+    <script src="admin-assets/js/main.js" type="text/javascript"></script>
+    <script src="admin-assets/js/custom-chart.js" type="text/javascript"></script>
+    <script>
+
+           const nameRegex = /^[A-Za-z\s]{2,}$/;
+
+
+           const discription = document.getElementById('cdisc');
+           const discerror = document.getElementById('errordisc');  
+
+           const h1input = document.getElementById('h1')
+           const h1inputerror = document.getElementById('errorh1')
+
+           const h2input = document.getElementById('h2')
+           const h2inputerror = document.getElementById('errorh2')
+
+
+           const h3input = document.getElementById('h3')
+           const h3inputerror = document.getElementById('errorh3')
+
+           const p1input = document.getElementById('p1')
+           const p1inputerror = document.getElementById('errorp1')
+
+
+
+           discription.addEventListener('input', () => {
+            var val = discription.value;
+            const isValid = validatedisc(val);
+           });
+
+           h1input.addEventListener('input', () => {
+            var val = h1input.value;
+            const isValid = validateh1(val);
+           });
+
+           h2input.addEventListener('input', () => {
+            var val = h2input.value;
+            const isValid = validateh2(val);
+           });
+
+           h3input.addEventListener('input', () => {
+            var val = h3input.value;
+            const isValid = validateh3(val);
+           });
+
+           p1input.addEventListener('input', () => {
+            var val = p1input.value;
+            const isValid = validatep1(val);
+           });
+
+
+
+
+
+
+           function validatedisc(name) {
+            if (name.trim().length < 1) {
+                discerror.textContent = "Discription cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                discerror.textContent = "Enter a valid discription"
+                return false
+            }
+            discerror.textContent = ""
+            return true
+            }
+
+
+
+
+            function validateh1(name) {
+            if (name.trim().length < 1) {
+                h1inputerror.textContent = "heading cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                h1inputerror.textContent = "Enter a valid heading"
+                return false
+            }
+            h1inputerror.textContent = ""
+            return true
+            }
+        
+
+
+
+            function validateh2(name) {
+            if (name.trim().length < 1) {
+                h2inputerror.textContent = "heading cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                h2inputerror.textContent = "Enter a valid heading"
+                return false
+            }
+            h2inputerror.textContent = ""
+            return true
+            }
+
+
+
+            function validateh3(name) {
+            if (name.trim().length < 1) {
+                h3inputerror.textContent = "heading cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                h3inputerror.textContent = "Enter a valid heading"
+                return false
+            }
+            h3inputerror.textContent = ""
+            return true
+            }
+
+
+
+
+
+            function validatep1(name) {
+            if (name.trim().length < 1) {
+                p1inputerror.textContent = "Sub heading cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                p1inputerror.textContent = "Enter a valid sub heading"
+                return false
+            }
+            p1inputerror.textContent = ""
+            return true
+            }
+
+
+
+
+
+            function checkCoupon(){
+                let discValid = validatedisc(discription.value)
+                let h1valid   = validateh1(h1input.value)
+                let h2valid   = validateh2(h2input.value)
+                let h3valid   = validateh3(h3input.value)
+                let p1valid   = validatep1(p1input.value)
+
+                if (discValid && h1valid && h2valid && h3valid && p1valid) {
+                return true
+            } else {
+                return false
+            }
+            }
+
+
+
+    function  Changestatus(id){
+    $.ajax({
+        type: 'POST',
+        url: '/admin/updatestatus',
+        data: { _id: id},
+        success: function (response) {
+            if (response.success) {
+                const updatedStatus = response.update;
+                const bannerId = response.bannerId; // Get the bannerId from the response
+                // Find the correct statusSpan using the data-banner-id attribute
+                const statusSpan = document.querySelector(`[data-banner-id="${bannerId}"]`);
+                if (statusSpan) {
+                    statusSpan.innerText = updatedStatus;
+                } else {
+                    alert('Status update failed');
+                }
+            }},
+        error: function () {
+            alert('Status update failed');
+        }
+    });
+}
+    </script>
