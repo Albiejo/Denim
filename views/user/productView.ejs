@@ -72,10 +72,17 @@ input[type="radio"]:checked + label {
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li><i class="fi-rs-user"></i><a href="/logout">Logout</a>
-                                </li>
-                                <li><i class="fi-rs-user"></i><a href="/userdashboard">Profile</a>
-                                </li>
+                                <%if(userData){%>
+                                    <li><i class="fi-rs-user"></i><a href="/logout">Logout</a>
+                                    </li>
+                                    <li><i class="fi-rs-user"></i><a href="/userdashboard">Profile</a>
+                                    </li>
+                                    <% } else { %>
+                                        <li><i class="fi-rs-user"></i><a href="/login">Login</a>
+                                        </li>
+                                        <li><i class="fi-rs-user"></i><a href="/registration">Signup</a>
+                                        </li>
+                                    <% }  %>
                             
                             </ul>
                         </div>
@@ -108,13 +115,13 @@ input[type="radio"]:checked + label {
                                     <a href="/wishlist">
                                         <img class="svgInject" alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
                                         
-                                        <span class="pro-count blue" id="wishlistcount"><%=userData.wishlist.length%></span>
+                                        <span class="pro-count blue" id="wishlistcount">0</span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="/shopcart">
                                         <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue"><%=userData.cart.length%></span>
+                                        <span class="pro-count blue">0</span>
                                     </a>
                                 </div>
                             </div>
@@ -136,11 +143,12 @@ input[type="radio"]:checked + label {
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a  href="/loginhomepage">Home</a>
-        
-                                    </li>
+                                        <%if(userData){%>
+                                        <li><a  href="/loginhomepage">Home</a></li>
+                                        <%} else {%>
+                                        <li><a  href="/">Home</a></li>
+                                        <% } %>
                                   
-                            
                                     <li><a href="/filter?gender=male">Men</a>
                                         
                                     </li>
@@ -426,10 +434,8 @@ input[type="radio"]:checked + label {
                                         </form>
 
 
-                                        <a aria-label="Add now" class="action-btn addwnow"
-                                            data-item-id="<%=product._id%>"><i class="fi-rs-heart" ></i></a>
-
-
+                                        <!-- <a aria-label="Add now" class="action-btn addwnow"
+                                            data-item-id="<%=product._id%>"><i class="fi-rs-heart" ></i></a> -->
 
                                     </div>
                                 </div>

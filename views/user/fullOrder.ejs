@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Evara - eCommerce HTML Template</title>
+    <title>Denim-Stores</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,6 +55,39 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="returnReasonModal2" tabindex="-1" role="dialog" aria-labelledby="returnReasonModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="returnModalLabel">Looking for Return?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Create a form to select a reason for return -->
+                    <form id="returnReasonFormm">
+                        <div class="form-group">
+                            <label for="returnReason">Please tell us why you want to Return</label>
+                            <select class="form-control" id="returnReason" name="returnReason">
+                                <option value="Wrong Item Delivered">Wrong Item Delivered</option>
+                                <option value="Damaged or Defective Product">Damaged or Defective Product</option>
+                                <option value="Size or Fit Issue">Size or Fit Issue</option>
+                                <option value="Changed My Mind">Changed My Mind</option>
+                                <option value="Late Delivery">Late Delivery</option>
+                                <!-- Add more reasons here as additional <option> elements -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmReturnbutton2">Confirm Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <header class="header-area header-style-1 header-height-2">
@@ -64,7 +97,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><i class="fi-rs-marker"></i><a href="page-contact.html">Our location</a></li>
+                                <li><i class="fi-rs-marker"></i><a href="#">Our location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,13 +115,17 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
+                                <%if(userData){%>
                                 <li><i class="fi-rs-user"></i><a href="/logout">Logout</a>
-
                                 </li>
-                                <li><a id="profileLink" href="/userdashboard">Profile</a>
-
+                                <li><i class="fi-rs-user"></i><a href="/userdashboard">Profile</a>
                                 </li>
-
+                                <% } else { %>
+                                    <li><i class="fi-rs-user"></i><a href="/login">Login</a>
+                                    </li>
+                                    <li><i class="fi-rs-user"></i><a href="/registration">Signup</a>
+                                    </li>
+                                <% }  %>
                             </ul>
                         </div>
                     </div>
@@ -101,29 +138,42 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="/public/assets/imgs/denim brand logo.png" alt="logo"></a>
+                        <a href="#"><img
+                                src="/public/assets/imgs/denim brand logo.png"
+                                alt="logo"></a>
                     </div>
                     <div class="header-right">
-                        <div class="search-style-2">
-                            <form action="#">
-                                <input type="text" placeholder="Search for items...">
+
+                        <div class="search-style-3" style="width: 70%;margin-left: 5%;"">
+                            <form action="/search" method="get">
+                                <div class="search-container">
+                                    <input type="text" class="search-input" name="query" placeholder="Search...">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
                             </form>
                         </div>
-                        <div class="header-action-right">
-                            <div class="header-action-2">
+
+
+                        <div class="header-action-right"  >
+                            <div class="header-action-2" >
                                 <div class="header-action-icon-2">
                                     <a href="/wishlist">
                                         <img class="svgInject" alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
-                                        <span class="pro-count blue">4</span>
+                                        <%if(userData){%>
+                                        <span class="pro-count blue" id="wishlistcount"><%=userData.wishlist.length%></span>
+                                        <%} else {%>
+                                            <span class="pro-count blue" id="wishlistcount">0</span>
+                                        <% } %>
                                     </a>
                                 </div>
-
-
-
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="/shopcart">
                                         <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">2</span>
+                                        <%if(userData){%>
+                                            <span class="pro-count blue"><%=userData.cart.length%></span>
+                                            <%} else {%>
+                                                <span class="pro-count blue">0</span>
+                                            <% } %>
                                     </a>
                                 </div>
                             </div>
@@ -134,45 +184,27 @@
         </div>
 
 
-        <div class="header-bottom header-bottom-bg-color sticky-bar">
+        <div class="header-bottom header-bottom-bg-color sticky-bar" >
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
                         <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
                     </div>
-                    <div class="header-nav d-none d-lg-flex">
-                        <div class="main-categori-wrap d-none d-lg-block">
-                            <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Browse Categories
-                            </a>
-                            <div class="categori-dropdown-wrap categori-dropdown-active-large">
-                                <ul>
-                                    <li class="has-children">
-                                        <a href="shop-grid-right.html"><i class="evara-font-dress"></i>Women's
-                                            Clothing</a>
-
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="shop-grid-right.html"><i class="evara-font-tshirt"></i>Men's
-                                            Clothing</a>
-
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
+                    <div class="header-nav d-none d-lg-flex" style="margin-left: 35%;">
+                      
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="/loginhomepage">Home</a>
-
+                                    <%if(userData){%>
+                                    <li><a  href="/loginhomepage">Home</a></li>
+                                    <%} else {%>
+                                    <li><a  href="/">Home</a></li>
+                                    <% } %>
+                                    <li><a href="/filter?gender=male">Men</a>
+                                        
                                     </li>
-
-                                    <li><a href="/menonly?gender=male">Men</a>
-
-                                    </li>
-                                    <li class="position-static"><a href="/womenonly?gender=female">Women</a>
-
+                                    <li class="position-static"><a href="/filter?gender=female">Women</a>
+                                        
                                     </li>
                                     <li>
                                         <a href="/contactus">Contact</a>
@@ -184,18 +216,28 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="hotline d-none d-lg-block">
+                    <!-- <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-headset"></i><span>Hotline</span>+91-9061609076</p>
+                    </div> -->
+
+                    
+                    <div id="toastContainer" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+                     
                     </div>
-                    <p class="mobile-promotion">Every Tuesday<span class="text-brand">Mother's Day</span>. Big Sale Up
-                        to 40%
+                      
+                    <!--modal displayed after item added to wishlist -->
+
+
+                    <p class="mobile-promotion">Every Tuesday<span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
                     </p>
+                    
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
+                                
                                 <a href="shop-wishlist.html">
                                     <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">4</span>
+                                    <span class="pro-count white" ></span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
@@ -203,7 +245,6 @@
                                     <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count white">2</span>
                                 </a>
-                              
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -218,6 +259,8 @@
             </div>
         </div>
     </header>
+
+
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
@@ -393,6 +436,8 @@
             </div>
         </div>
     </div>
+
+
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -703,8 +748,6 @@ $('#confirmReturns').on('click', function() {
 
 
 function showmodal(orderid, itemid) {
-    console.log(orderid, itemid, "orderid and itemid");
-    console.log("single item modal clicked ");
 
     $('#returnReasonModal2').modal('show');
 

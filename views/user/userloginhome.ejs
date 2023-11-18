@@ -1131,6 +1131,9 @@
 
         $(document).ready(function () {
 
+           
+
+
             $('.wlist').on('click', function () {
                 let product_id = $(this).data('item-id');
 
@@ -1139,27 +1142,49 @@
                     method: 'POST',
                     data: { product_id: product_id },
                     success: function (response) {
-                        if(response.error){
-                            document.getElementById('wishlistmsg').innerText="Item already present in wishlist";
                             document.getElementById('wishlistcount').innerText=response.count
-                        }else{
-                   
-                                document.getElementById('wishlistcount').innerText=response.count
-                                let modal = document.getElementById('wishlistModal');
-                                modal.style.display = 'block';
+                            var toastContainer = document.getElementById('toastContainer');
+                            var toastEl = document.createElement('div');
+                            toastEl.className = 'toast';
+                            toastEl.setAttribute('role', 'alert');
+                            toastEl.setAttribute('aria-live', 'assertive');
+                            toastEl.setAttribute('aria-atomic', 'true');
+                            toastContainer.appendChild(toastEl);
 
-                                // Close the modal when the close button is clicked
-                                let closeBtn = document.getElementsByClassName('close')[0];
-                                closeBtn.onclick = function () {
-                                modal.style.display = 'none';
-                                };
-                                setTimeout(()=>{
-                                    modal.style.display = 'none';
-                                    document.getElementById('wishlistmsg').innerText="Item added to wishlist"
+                            var toastHeader = document.createElement('div');
+                            toastHeader.className = 'toast-header bg-success text-white';
+                            var strong = document.createElement('strong');
+                            strong.className = 'me-auto';
+                            strong.innerText = 'Wishlist';
+                            var button = document.createElement('button');
+                            button.type = 'button';
+                            button.className = 'btn-close text-white';
+                            button.setAttribute('data-bs-dismiss', 'toast');
+                            button.setAttribute('aria-label', 'Close');
+                            toastHeader.appendChild(strong);
+                            toastHeader.appendChild(button);
 
-                                },1000)
-                            
-                            }                
+
+
+                            var toastBody = document.createElement('div');
+                            toastBody.className = 'toast-body';
+                            toastBody.idName= 'toast-body-id'
+                            if(response.error){
+                                toastBody.innerText="Item already present in wishlist";
+                            }else{
+                            toastBody.innerText = 'Item added to your wishlist!';
+                             }
+                            toastEl.appendChild(toastHeader);
+                            toastEl.appendChild(toastBody);
+
+                            var toast = new bootstrap.Toast(toastEl, {
+                                autohide: true,
+                                delay: 3000,
+                                animation: true,
+                            });
+
+                            toast.show();
+                        
                     },
                     error: function (error) {
                         console.error(error);
@@ -1168,9 +1193,7 @@
             });
         
 
-            closeModal.addEventListener("click", function () {
-                wishlistModal.style.display = "none";
-            });
+          
         });
 
     </script>

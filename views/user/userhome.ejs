@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Evara - eCommerce HTML Template</title>
+    <title>Denim-Stores</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,13 +84,13 @@
                                     <a href="/wishlist">
                                         <img class="svgInject" alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
                                        
-                                        <span class="pro-count blue" id="wishlistcount">1</span>
+                                        <span class="pro-count blue" id="wishlistcount">0</span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="/shopcart">
                                         <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">1</span>
+                                        <span class="pro-count blue">0</span>
                                     </a>
                                 </div>
                             </div>
@@ -112,15 +112,15 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="/loginhomepage">Home</a>
+                                    <li><a  href="/">Home</a>
         
                                     </li>
                                   
                             
-                                    <li><a href="/menonly?gender=male">Men</a>
+                                    <li><a href="/filter?gender=male">Men</a>
                                         
                                     </li>
-                                    <li class="position-static"><a href="/womenonly?gender=female">Women</a>
+                                    <li class="position-static"><a href="/filter?gender=female">Women</a>
                                         
                                     </li>
                                     <li>
@@ -401,7 +401,10 @@
                                                 <img class="hover-img" src="/cloud_images/<%=jeansitems[i].images[1].url%>" alt="">
                                             </a>
                                         </div>
-                                       
+                                        <div class="product-action-1 ">
+                                            <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                           ><i class="fi-rs-heart"></i></a>
+                                        </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
                                         </div>
@@ -411,18 +414,17 @@
                                             <a ><%=jeansitems[i].category%></a>
                                         </div>
                                         <h2><a href="/productview?id=<%=jeansitems[i]._id %>"><%=jeansitems[i].name%></a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <!-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
-                                        </div>
+                                        </div> -->
                                         <div class="product-price">
                                             <span>₹<%=jeansitems[i].offerPrice%></span>
                                             <span class="old-price">₹<%=jeansitems[i].regularPrice%></span>
                                         </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow" data-item-id="<%=jeansitems[i]._id%>"
-                                            href="/login"><i class="fi-rs-heart"></i></a>
+                                        <div>
+                                            <span style="color: red; font-weight: bold;"><%=jeansitems[i].brand%></span>
                                         </div>
                                     </div>
                                 </div>
@@ -446,7 +448,10 @@
                                                 <img class="hover-img" src="/cloud_images/<%=capcategory[i].images[1].url%>" alt="">
                                             </a>
                                         </div>
-                                       
+                                        <div class="product-action-1 ">
+                                            <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                           ><i class="fi-rs-heart"></i></a>
+                                        </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
                                         </div>
@@ -456,18 +461,17 @@
                                             <a ><%=capcategory[i].category%></a>
                                         </div>
                                         <h2><a href="/productview?id=<%=capcategory[i]._id %>"><%=capcategory[i].name%></a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <!-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
-                                        </div>
+                                        </div> -->
                                         <div class="product-price">
                                             <span>₹<%=capcategory[i].offerPrice%></span>
                                             <span class="old-price">₹<%=capcategory[i].regularPrice%></span>
                                         </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow" data-item-id="<%=capcategory[i]._id%>"
-                                                href="/login"><i class="fi-rs-heart"></i></a>
+                                        <div>
+                                            <span style="color: red; font-weight: bold;"><%=capcategory[i].brand%></span>
                                         </div>
                                     </div>
                                 </div>
@@ -490,7 +494,10 @@
                                                 <img class="hover-img" src="/cloud_images/<%=jacketcategory[i].images[1].url%>" alt="">
                                             </a>
                                         </div>
-                                       
+                                        <div class="product-action-1 ">
+                                            <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                           ><i class="fi-rs-heart"></i></a>
+                                        </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
                                         </div>
@@ -500,18 +507,17 @@
                                             <a ><%=jacketcategory[i].category%></a>
                                         </div>
                                         <h2><a href="/productview?id=<%=jacketcategory[i]._id %>"><%=jacketcategory[i].name%></a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <!-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
-                                        </div>
+                                        </div> -->
                                         <div class="product-price">
                                             <span>₹<%=jacketcategory[i].offerPrice%></span>
                                             <span class="old-price">₹<%=jacketcategory[i].regularPrice%></span>
                                         </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow" data-item-id="<%=jacketcategory[i]._id%>"
-                                                href="/login"><i class="fi-rs-heart"></i></a>
+                                        <div>
+                                            <span style="color: red; font-weight: bold;"><%=jacketcategory[i].brand%></span>
                                         </div>
                                     </div>
                                 </div>
@@ -532,7 +538,10 @@
                                                 <img class="hover-img" src="/cloud_images/<%=shortscategory[i].images[1].url%>" alt="">
                                             </a>
                                         </div>
-                                       
+                                        <div class="product-action-1 ">
+                                            <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                           ><i class="fi-rs-heart"></i></a>
+                                        </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
                                         </div>
@@ -542,18 +551,17 @@
                                             <a ><%=shortscategory[i].category%></a>
                                         </div>
                                         <h2><a href="/productview?id=<%=shortscategory[i]._id %>"><%=shortscategory[i].name%></a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <!-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
                                             </span>
-                                        </div>
+                                        </div> -->
                                         <div class="product-price">
                                             <span>₹<%=shortscategory[i].offerPrice%></span>
                                             <span class="old-price">₹<%=shortscategory[i].regularPrice%></span>
                                         </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow" data-item-id="<%=shortscategory[i]._id%>"
-                                                href="/login"><i class="fi-rs-heart"></i></a>
+                                        <div>
+                                            <span style="color: red; font-weight: bold;"><%=shortscategory[i].brand%></span>
                                         </div>
                                     </div>
                                 </div>
@@ -596,7 +604,10 @@
                                             <img class="hover-img product-image" src="/cloud_images/<%=Womenproducts[i].images[1].url%>" alt="">
                                         </a>
                                     </div>
-                                   
+                                    <div class="product-action-1 ">
+                                        <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                       ><i class="fi-rs-heart"></i></a>
+                                    </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
                                         <span class="hot">Hot</span>
                                     </div>
@@ -604,21 +615,20 @@
                                 <div class="product-content-wrap">
                                     <div class="product-category">
                                         <a  style="color: red;"><%=Womenproducts[i].category  %></a>
-                                        <span style="color: red;"><%=Womenproducts[i].brand%></span>
+                                        
                                     </div>
                                     <h2><a href="/productview?id=<%=Womenproducts[i]._id %>"><%=Womenproducts[i].name%></a></h2>
-                                    <div class="rating-result" title="90%">
+                                    <!-- <div class="rating-result" title="90%">
                                         <span>
                                             <span>90%</span>
                                         </span>
-                                    </div>
+                                    </div> -->
                                     <div class="product-price">
                                         <span>₹<%=Womenproducts[i].offerPrice%></span>
                                         <span class="old-price">₹<%=Womenproducts[i].regularPrice%></span>
                                     </div>
-                                    <div class="product-action-1 show">
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow" data-item-id="<%=Womenproducts[i]._id%>"
-                                            href="/login"><i class="fi-rs-heart"></i></a>
+                                    <div>
+                                        <span style="color: red; font-weight: bold;"><%=Womenproducts[i].brand%></span>
                                     </div>
                                 </div>
                             </div>
@@ -689,7 +699,10 @@
                                             <img class="hover-img product-image" src="/cloud_images/<%=Menproducts[i].images[1].url%>" alt="">
                                         </a>
                                     </div>
-                                   
+                                    <div class="product-action-1 ">
+                                        <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                       ><i class="fi-rs-heart"></i></a>
+                                    </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
                                         <span class="hot">Hot</span>
                                     </div>
@@ -697,22 +710,20 @@
                                 <div class="product-content-wrap">
                                     <div class="product-category">
                                         <a  style="color: red;"><%=Menproducts[i].category  %></a>
-                                        <span style="color: red;"><%=Menproducts[i].brand%></span>
+                                
                                     </div>
                                     <h2><a href="/productview?id=<%=Menproducts[i]._id %>"><%=Menproducts[i].name%></a></h2>
-                                    <div class="rating-result" title="90%">
+                                    <!-- <div class="rating-result" title="90%">
                                         <span>
                                             <span>90%</span>
                                         </span>
-                                    </div>
+                                    </div> -->
                                     <div class="product-price">
                                         <span>₹<%=Menproducts[i].offerPrice%></span>
                                         <span class="old-price">₹<%=Menproducts[i].regularPrice%></span>
                                     </div>
-                                    <div class="product-action-1 show">
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow"  data-item-id="<%=Menproducts[i]._id%>"
-                                            href="/login"><i class="fi-rs-heart"></i></a>
-                                        
+                                    <div>
+                                        <span style="color: red; font-weight: bold;"><%=Menproducts[i].brand%></span>
                                     </div>
                                 </div>
                             </div>
@@ -829,7 +840,10 @@
                                                             alt="">
                                                     </a>
                                                 </div>
-                                        
+                                                <div class="product-action-1 ">
+                                                    <a href="/login" aria-label="Add To Wishlist" class="action-btn hover-up wlist" 
+                                                   ><i class="fi-rs-heart"></i></a>
+                                                </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
                                                     <span class="hot">Hot</span>
                                                 </div>
@@ -839,11 +853,11 @@
                                                     <a><%=Allproducts[i].category%></a>
                                                 </div>
                                                
-                                                <div class="rating-result" title="90%">
+                                                <!-- <div class="rating-result" title="90%">
                                                     <span>
                                                         <span>70%</span>
                                                     </span>
-                                                </div>
+                                                </div> -->
                                                 <div class="product-price">
                                                     <span>₹<%=Allproducts[i].regularPrice%></span>
                                                     <span class="old-price">₹<%=Allproducts[i].offerPrice%></span>
@@ -851,14 +865,7 @@
                                                 <div>
                                                     <span style="color: red; font-weight: bold;"><%=Allproducts[i].brand%></span>
                                                 </div>
-                                                <div class="product-action-1 show">
-                                                    <!-- <a aria-label="Add To Cart" class="action-btn hover-up"
-                                                        href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a> -->
-                                                      
-                                                            <a aria-label="Add To Wishlist" class="action-btn hover-up addwnow"
-                                                            data-item-id="<%=Allproducts[i]._id%>"  href="/login"><i class="fi-rs-heart"></i></a>
-
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <%}%>

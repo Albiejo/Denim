@@ -609,10 +609,7 @@ const Loadmenonly = async (req, res) => {
       gender: gender,
       list: true,
     }).countDocuments();
-
-
     
-
     let productData = await Product.find({ gender: gender, list: true })
       .skip((page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE);
@@ -642,12 +639,15 @@ const Loadmenonly = async (req, res) => {
     }
 
 
-
+    let userData
     const categoryData = await Category.find({});
     const brandData = await Brand.find({});
-    const userData = await User.findById({ _id: req.session.user_id });
+    if(req.session.user_id){
+     userData = await User.findById({ _id: req.session.user_id });
+    }
+   
     const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
-    if (userData) {
+  
       res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.render("allCategories", {
         productData: productData,
@@ -655,14 +655,12 @@ const Loadmenonly = async (req, res) => {
         brandData: brandData,
         currentPage: page,
         totalPages: totalPages,
-        userData: userData,
         gender: gender,
         categoryy:categoryy,
-        sort:sort
+        sort:sort,
+        userData:userData
       });
-    } else {
-      res.redirect("/login");
-    }
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).render('errorpage' , {message:"500: Internal Server Error...please try after sometime"}); 
@@ -721,8 +719,10 @@ const Loadmenonly = async (req, res) => {
 
 const checkingproduct = async (req, res) => {
   try {
-    const userid = req.session.user_id;
-    const userData = await User.findOne({ _id: userid });
+    let userData
+    if(req.session.user_id){
+      userData = await User.findOne({ _id:req.session.user_id});
+    }
     const id = req.query.id;
     const productData = await Product.find({ _id: id });
     const categoryData = await Category.find({});
@@ -1636,6 +1636,10 @@ const confirmOrderDetails = async (req, res) => {
 
 const loadFullOrderDetails = async (req, res) => {
   try {
+    let userData
+    if(req.session.user_id){
+      userData=await User.findOne({_id:req.session.user_id})
+    }
     const orderId = req.query.orderid;
     const order = await Order.findOne({ _id: orderId });
     const addressData = order.Address;
@@ -1655,6 +1659,7 @@ const loadFullOrderDetails = async (req, res) => {
         Orderr: Orderr,
         productData: productData,
         items: Orderr.Items,
+        userData:userData
       });
     } else {
       res.redirect("/login");
@@ -2313,10 +2318,9 @@ const loadUserOrders = async(req,res)=>{
     const page = parseInt(req.query.page) || 1; 
     const skip = (page - 1) * pageSize
     const userData = await User.findById(req.session.user_id)
-    const orderdata = await Order.find({}).sort({ createdAt: -1 }).skip(skip).limit(pageSize);
+    const orderdata = await Order.find({}).sort({ createdOn: -1 }).skip(skip).limit(pageSize);
     const totalOrders = await Order.find({}).countDocuments()
     const totalPages = Math.ceil(totalOrders / pageSize);
-
 
     res.render('myOrders',{orderdata:orderdata , userData:userData,page :page ,totalPages:totalPages})
   } catch (error) {
