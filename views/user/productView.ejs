@@ -108,13 +108,13 @@ input[type="radio"]:checked + label {
                                     <a href="/wishlist">
                                         <img class="svgInject" alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
                                         
-                                        <span class="pro-count blue" id="wishlistcount">0</span>
+                                        <span class="pro-count blue" id="wishlistcount"><%=userData.wishlist.length%></span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="/shopcart">
                                         <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">0</span>
+                                        <span class="pro-count blue"><%=userData.cart.length%></span>
                                     </a>
                                 </div>
                             </div>

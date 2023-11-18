@@ -488,31 +488,31 @@ const Saveproducts = async (req, res) => {
             category: categorySelect,
             regularPrice: regprice,
             offerPrice: offerprice,
-            images: [],
+            images: Images,
             stock: stock,
             list: 1,
             gender: gender
         });
 
-        for (let file of req.files) {
+        // for (let file of req.files) {
             
-            const randomInteger = Math.floor(Math.random() * 20000001)
-            const imageDirectory = path.join(__dirname,"/croppedimages")
-            let imgFileName = "cropped" + randomInteger + ".jpg"
-            let imagePath = path.join(imageDirectory, imgFileName)
+        //     const randomInteger = Math.floor(Math.random() * 20000001)
+        //     const imageDirectory = path.join(__dirname,"/croppedimages")
+        //     let imgFileName = "cropped" + randomInteger + ".jpg"
+        //     let imagePath = path.join(imageDirectory, imgFileName)
             
-            const croppedImage = await sharp(file.path)
-                .resize(1000, 1000, {
-                    fit: "fill",
-                })
-                .toFile(imagePath)
-            if (croppedImage) {
-                let imgObj={
-                    url:imgFileName
-                }
-                ProductInstance.images.push(imgObj)
-            }
-        }
+        //     const croppedImage = await sharp(file.path)
+        //         .resize(1000, 1000, {
+        //             fit: "fill",
+        //         })
+        //         .toFile(imagePath)
+        //     if (croppedImage) {
+        //         let imgObj={
+        //             url:imgFileName
+        //         }
+        //         ProductInstance.images.push(imgObj)
+        //     }
+        // }
 
         const addSuccess = await ProductInstance.save();
         if (addSuccess) {
