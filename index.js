@@ -2,7 +2,8 @@ require('dotenv').config()
 const mongoose=require('mongoose')
 
 mongoose.connect("mongodb+srv://albiejosephs101:FYiPv0bBl88IGOVv@denimstores-db.yjh7hie.mongodb.net/denim_stores?retryWrites=true&w=majority")
-
+.then(()=>console.log("mongoose connected"))
+.catch((error)=>console.log("not connected!",error.message))
 
 const express = require("express");
 const app = express()

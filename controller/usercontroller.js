@@ -319,9 +319,9 @@ const loadloghomepage = async (req, res) => {
 //loading user dashboard
 const userdashboard = async (req, res) => {
   try {
+   
     const userData = await User.findById({ _id: req.session.user_id });
-    let orderdata = await Order.find({ customerId: userData._id });
-    orderdata.sort((a, b) => new Date(b.createdOn) - new Date(a.createdOn));
+   
 
     const user = await User.findById({ _id: req.session.user_id }).populate(
       "wishlist.productId"
@@ -336,7 +336,6 @@ const userdashboard = async (req, res) => {
       res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.render("userDashboard", {
         userData: userData,
-        orderdata: orderdata,
         coupon: coupon,
         transactionData: transactionData,
       });
@@ -614,6 +613,21 @@ const Loadmenonly = async (req, res) => {
       .skip((page - 1) * ITEMS_PER_PAGE)
       .limit(ITEMS_PER_PAGE);
 
+
+      if(sort){
+        productData = await Product.find({ gender: gender,list: true })
+        .sort({ offerPrice: sort })
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+  
+        totalProducts = await Product.find({
+          gender: gender,
+          category:categoryy,
+          list: true,
+        }).sort({ offerPrice: sort }).countDocuments();
+      }
+
+
     if(categoryy){
       productData = await Product.find({ gender: gender , category:categoryy , list: true })
       .skip((page - 1) * ITEMS_PER_PAGE)
@@ -625,18 +639,7 @@ const Loadmenonly = async (req, res) => {
       }).countDocuments();
     }
 
-    if(sort){
-      productData = await Product.find({ gender: gender, category:categoryy ,list: true })
-      .sort({ offerPrice: sort })
-      .skip((page - 1) * ITEMS_PER_PAGE)
-      .limit(ITEMS_PER_PAGE);
-
-      totalProducts = await Product.find({
-        gender: gender,
-        category:categoryy,
-        list: true,
-      }).sort({ offerPrice: sort }).countDocuments();
-    }
+    
 
 
     let userData
@@ -806,14 +809,17 @@ const loadedituseraddress = async (req, res) => {
     const username = req.body.Username;
     const orderdata = await Order.find({ customerId: userData._id });
     const newemail = req.body.email;
-    // const newpassword = req.body.password
-
+    const coupon = await Coupon.find({});
+    const transactionData = userData.transactionDetails;
+    transactionData.sort((a, b) => b.transactionDate.getTime() - a.transactionDate.getTime());
     const checkEmail = await User.findOne({ email: req.body.email });
     if (checkEmail) {
       res.render("userDashboard", {
         addressmessage: "OOPS ! Email already exists , try again..",
         userData: userData,
         orderdata: orderdata,
+        transactionData:transactionData,
+        coupon: coupon,
       });
       return;
     }
@@ -823,6 +829,9 @@ const loadedituseraddress = async (req, res) => {
         message: "Some fileds were missing . Try again !",
         userData: userData,
         orderdata: orderdata,
+        transactionData:transactionData,
+        coupon: coupon
+        
       });
       return;
     }
@@ -1534,7 +1543,9 @@ const loadOrderConfirmation = async (req, res) => {
 var items;
 const confirmOrderDetails = async (req, res) => {
   try {
-
+    if(!req.session.user_id){
+      res.redirect('/login')
+    }
     const CouponData = await Coupon.findOne({ Code: ccode });
     const userid = req.session.user_id;
     const uniqueOrderId = uuidv4();
@@ -2311,18 +2322,23 @@ const postUserReview = async(req,res)=>{
 }
 
 
+
+
+
 const loadUserOrders = async(req,res)=>{
   try {
-
+    const useridd = req.session.user_id
     const pageSize = 5; 
     const page = parseInt(req.query.page) || 1; 
     const skip = (page - 1) * pageSize
     const userData = await User.findById(req.session.user_id)
-    const orderdata = await Order.find({}).sort({ createdOn: -1 }).skip(skip).limit(pageSize);
+    const orderdata = await Order.find({customerId:useridd}).sort({ createdOn: -1 }).skip(skip).limit(pageSize);
     const totalOrders = await Order.find({}).countDocuments()
     const totalPages = Math.ceil(totalOrders / pageSize);
-
+    console.log("session id is :",useridd)
     res.render('myOrders',{orderdata:orderdata , userData:userData,page :page ,totalPages:totalPages})
+
+
   } catch (error) {
     console.log(error.message)
     res.status(500).render('errorpage',{message:"500: Internal error , please try again . !"})

@@ -475,12 +475,13 @@ input[type="radio"]:checked + label {
                                         <div class="single-comment justify-content-between d-flex">
                                             <div class="user justify-content-between d-flex">
                                                 <div class="thumb text-center">
-                                                    <h6><a href="#"><%=product.reviews[i].customerName%></a></h6>
+                                                    
+                                                    <h6><%=product.reviews[i].customerName%></h6>
                                                 </div>
                                                 <div class="desc">
-                                                    <div class=" d-inline-block">
-                                                        <!-- <div class="product-rating" style="width: <%= product.reviews[i].rating * 20 %>%;"></div> -->
-                                                        <span style="color:blue;">Rating:<%=product.reviews[i].rating%>/5</span>                                                    </div>
+                                                    <div class="product-rate d-inline-block">
+                                                        <span style="color:red;">Rating:<%=product.reviews[i].rating%>/5</span>
+                                                    </div>
                                                     <p><%=product.reviews[i].review%></p>
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-flex align-items-center">
@@ -538,25 +539,28 @@ input[type="radio"]:checked + label {
                     <div class="col-lg-8 col-md-12">
 
 
-                        <form class="form-contact " action="/productview"  method="post">
+                        <form class="form-contact " action="/productview"  method="post" onsubmit="return checkFormValidity()">
 
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Your Comment"></textarea>
+                                        <div style="color: red;font-weight: bold;" id="commentmsg"></div>
                                     </div>
                                     <input name="productid" hidden value="<%=product._id%>">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text"vplaceholder="Name">
+                                        <input class="form-control" name="name" id="name" type="text" placeholder="Your Name">
+                                        <div style="color: red;font-weight: bold;" id="nameemsg"></div>
                                     </div>
-                                    
+                                    <span>Rate out of 5</span><br>
+                                    <input type="number" name="rate" style="width: 20%;" id="rateingnumber">
+                                    <div style="color: red;font-weight: bold;" id="ratingmsg"></div>
+                                    <br>
                                 </div>
-                                <label for="rate">Rate out of 5</label>
-                                <input type="number" name="rate" style="width: 20%;">
-                                <br>
+                               
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="button button-contactForm">Submit Review</button>
@@ -569,159 +573,7 @@ input[type="radio"]:checked + label {
             </div>
             </div>
             </div>
-            <!-- <div class="row mt-60">
-                <div class="col-12">
-                    <h3 class="section-title style-1 mb-30">Related products</h3>
-                </div>
-                <div class="col-12">
-                    <div class="row related-products">
-                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap small hover-up">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html" tabindex="0">
-                                            <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
-                                            <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
-"><i class="fi-rs-search"></i></a>
-                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">Hot</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass
-                                            Headphone</a></h2>
-                                    <div class="rating-result" title="90%">
-                                        <span>
-                                        </span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>$238.85 </span>
-                                        <span class="old-price">$245.8</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap small hover-up">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html" tabindex="0">
-                                            <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="">
-                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
-"><i class="fi-rs-search"></i></a>
-                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="sale">-12%</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth
-                                            Speaker</a></h2>
-                                    <div class="rating-result" title="90%">
-                                        <span>
-                                        </span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>$138.85 </span>
-                                        <span class="old-price">$145.8</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap small hover-up">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html" tabindex="0">
-                                            <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="">
-                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                            data-bs-toggle="modal" data-bs-target="#quickViewModal
-"><i class="fi-rs-search"></i></a>
-                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="new">New</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA
-                                            Goole</a></h2>
-                                    <div class="rating-result" title="90%">
-                                        <span>
-                                        </span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>$738.85 </span>
-                                        <span class="old-price">$1245.8</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap small hover-up mb-0">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html" tabindex="0">
-                                            <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="">
-                                            <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn small hover-up"
-                                            data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                class="fi-rs-search"></i></a>
-                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                            href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn small hover-up"
-                                            href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">Hot</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K
-                                            2021EF</a></h2>
-                                    <div class="rating-result" title="90%">
-                                        <span>
-                                        </span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>$89.8 </span>
-                                        <span class="old-price">$98.8</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            
             <div class="banner-img banner-big wow fadeIn f-none animated mt-50">
                 <img class="border-radius-10" src="assets/imgs/banner/banner-4.png" alt="">
                 <div class="banner-text">
@@ -800,6 +652,91 @@ input[type="radio"]:checked + label {
                 });
             });
         });
+
+
+        const commentInput = document.getElementById('comment');
+        const nameInput = document.getElementById('name');
+        const rateInput = document.getElementById('rateingnumber');
+
+        const nameValidationMessage = document.getElementById('nameemsg');
+        const commentValidationMessage = document.getElementById('commentmsg');
+        const ratingValidationMessage = document.getElementById('ratingmsg');
+
+
+        const nameRegex = /^[A-Za-z\s]{2,}$/;
+
+        nameInput.addEventListener('input', () => {
+            const name = nameInput.value;
+            const isValid = validateName(name);
+        });
+
+        commentInput.addEventListener('input', () => {
+            const comment = commentInput.value;
+            const isValid = validatecomment(comment);
+        });
+
+        rateInput.addEventListener('input', () => {
+            const rate = rateInput.value;
+            const isValid = validaterate(rate);
+        });
+
+
+
+
+
+        function validateName(name) {
+            if (name.trim().length < 1) {
+                nameValidationMessage.textContent = "Name cannot be empty"
+                return false
+            }
+            if (!nameRegex.test(name.trim())) {
+                nameValidationMessage.textContent = "Enter a valid name"
+                return false
+            }
+            nameValidationMessage.textContent = ""
+            return true
+        }
+
+
+
+
+        function validatecomment(comment) {
+            if (comment.trim().length < 1) {
+                commentValidationMessage.textContent = "Comment cannot be empty"
+                return false
+            }
+            commentValidationMessage.textContent = ""
+                return true
+        }
+
+        function validaterate(rate) {
+            if (rate.trim().length < 1) {
+                ratingValidationMessage.textContent = "Rating cannot be empty"
+                return false
+            }
+            if (isNaN(rate) || Number(rate) < 0 || Number(rate) > 5) {
+                ratingValidationMessage.textContent = "Rating must be a number between 0 and 5";
+                return false;
+            }
+            ratingValidationMessage.textContent = ""
+                return true
+        }
+
+
+
+        function checkFormValidity() {
+            let nameIsValid = validateName(nameInput.value);
+            let commentIsValid = validatecomment(commentInput.value);
+            let ratingIsValid = validaterate(rateInput.value);
+            
+
+            if (nameIsValid && commentIsValid && ratingIsValid) {
+                return true
+            } else {
+                return false
+            }
+        }
+
     </script>
 
 </body>

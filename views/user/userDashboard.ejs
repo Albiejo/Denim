@@ -105,73 +105,7 @@
                                             </div>
 
 
-                                            <div class="tab-pane fade" id="orders" role="tabpanel"
-                                                aria-labelledby="orders-tab">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5 class="mb-0">Your Orders</h5><br>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>sl.no</th>
-                                                                        <th>Order Id</th>
-                                                                        <th>Date</th>
-                                                                        <th>Status</th>
-                                                                        <th>Total</th>
-                                                                        <th>Action</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <%for(let i=0; i< orderdata.length; i++){%>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <%=i+1%>
-                                                                            </td>
-                                                                            <td>
-                                                                                <%=orderdata[i].orderId%>
-                                                                            </td>
-                                                                            <td>
-                                                                                <%=orderdata[i].createdOn.toLocaleDateString()%>
-                                                                            </td>
-                                                                            <%if(orderdata[i].status==="Pending"){%>
-                                                                                <td
-                                                                                    style="color: rgb(1, 170, 255);font-weight: bold;">
-                                                                                    <%=orderdata[i].status%>
-                                                                                </td>
-                                                                                <%}else
-                                                                                    if(orderdata[i].status==="Delivered"
-                                                                                    ){%>
-                                                                                    <td
-                                                                                        style="color: rgb(5, 231, 5); font-weight:300;">
-                                                                                        <%=orderdata[i].status%>
-                                                                                    </td>
-                                                                                    <%}else{%>
-                                                                                        <td
-                                                                                            style="color: rgb(255, 0, 0); font-weight: bold;">
-                                                                                            <%=orderdata[i].status%>
-                                                                                        </td>
-                                                                                        <%}%>
-                                                                                            <td>₹
-                                                                                                <%=orderdata[i].totalAmount%>
-                                                                                            </td>
-                                                                                            <td><a
-                                                                                                    href="/fullOrderDetails?orderid=<%=orderdata[i]._id%>">View</a>
-                                                                                            </td>
-
-                                                                        </tr>
-                                                                        <%}%>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                           
                                            
                                             
                                             

@@ -15,7 +15,7 @@
                     <div class="col-lg-9">
                         <div class="shop-product-fillter style-2">
 
-                            <div class="sort-by-product-area">
+                            <!-- <div class="sort-by-product-area">
                                 <div class="sort-by-cover">
                                     <div class="sort-by-product-wrap">
                                         <div class="sort-by">
@@ -32,7 +32,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
 <!--sorting products here -->
@@ -72,11 +72,11 @@
                                                 <%=searchResults[i].productName%>
                                             </a></h2>
                                         <div class="product-category">
-                                            <span>
+                                            <span style="color: black;font-weight: bold;">
                                                 <%=searchResults[i].category%>
                                             </span>
                                         </div>
-                                        <span style="font-weight:bolder">Brand : <%=searchResults[i].brand%></span>
+                                        <span style="font-weight:bolder;color: red;">Brand : <%=searchResults[i].brand%></span>
 
                                         <div class="product-price">
                                             <span>$<%=searchResults[i].offerPrice%></span>
@@ -88,11 +88,11 @@
                                             <a aria-label="Add now" class="action-btn addwnow"
                                                 data-item-id="<%=searchResults[i]._id%>"><i class="fi-rs-heart"></i>Add to
                                                 Wishlist</a>
-                                            <div class="rating-result" title="90%">
+                                            <!-- <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>90%</span>
                                                 </span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

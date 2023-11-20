@@ -62,11 +62,11 @@
                                                 <%=productData[i].productName%>
                                             </a></h2>
                                         <div class="product-category">
-                                            <span>
+                                            <span style="color: black;font-weight: bold;">
                                                 <%=productData[i].category%>
                                             </span>
                                         </div>
-                                        <span style="font-weight:bolder">Brand : <%=productData[i].brand%></span>
+                                        <span style="font-weight:bolder;color: red;">Brand : <%=productData[i].brand%></span>
 
                                         <div class="product-price">
                                             <span>$<%=productData[i].offerPrice%></span>
@@ -170,8 +170,8 @@
                                     </div>
                                 </div><br>
                             </div>
-                            <a href="/filter?gender=<%=gender%>&categoryName=<%=categoryy%>&sort=1"><button>Low to high</button></a>
-                            <a href="/filter?gender=<%=gender%>&categoryName=<%=categoryy%>&sort=-1"><button>High to low</button></a>
+                            <a href="/filter?gender=<%=gender%>&sort=1&categoryName=<%=categoryy%>"><button>Low to high</button></a>
+                            <a href="/filter?gender=<%=gender%>&sort=-1&categoryName=<%=categoryy%>"><button>High to low</button></a>
                         </div>
                     
                         </div>
