@@ -1414,55 +1414,55 @@ const fetchDataGraph = async (req, res) => {
 
 
 
-const downloadSalesReport = async(req,res)=>{
-    try {
+// const downloadSalesReport = async(req,res)=>{
+//     try {
 
-        let Orderdata;
-        let deliverystatus=req.query.deliverystatus
-        let query = {}; 
-        let startdate = req.query.startdate;
-        let enddate = req.query.enddate;
-        if (deliverystatus && deliverystatus !== "Show all") {
-            query.status = deliverystatus;
-          }
-          query.status = { $regex: new RegExp(deliverystatus, 'i') };
+//         let Orderdata;
+//         let deliverystatus=req.query.deliverystatus
+//         let query = {}; 
+//         let startdate = req.query.startdate;
+//         let enddate = req.query.enddate;
+//         if (deliverystatus && deliverystatus !== "Show all") {
+//             query.status = deliverystatus;
+//           }
+//           query.status = { $regex: new RegExp(deliverystatus, 'i') };
           
           
-          if (deliverystatus && deliverystatus === "Show all") {
-            query = {};
-          }
-          if (startdate && enddate) {
-            query.createdOn = { $gte: new Date(startdate), $lt: new Date(enddate) };
-          } else if (startdate) {
-            query.createdOn = { $gte: new Date(startdate) };
-          } else if (enddate) {
-            enddate.setDate(enddate.getDate() + 1);
-            query.createdOn = { $lt: new Date(enddate) };
-          }
+//           if (deliverystatus && deliverystatus === "Show all") {
+//             query = {};
+//           }
+//           if (startdate && enddate) {
+//             query.createdOn = { $gte: new Date(startdate), $lt: new Date(enddate) };
+//           } else if (startdate) {
+//             query.createdOn = { $gte: new Date(startdate) };
+//           } else if (enddate) {
+//             enddate.setDate(enddate.getDate() + 1);
+//             query.createdOn = { $lt: new Date(enddate) };
+//           }
 
           
-        Orderdata = await Order.find(query).populate('customerId');
+//         Orderdata = await Order.find(query).populate('customerId');
 
 
-        const templatePath = './views/admin/downloadsreport.ejs';
-        const templateContent = await fs.readFile(templatePath, 'utf-8');
-        const htmlTemplate = ejs.render(templateContent, { Orderdata });
+//         const templatePath = './views/admin/downloadsreport.ejs';
+//         const templateContent = await fs.readFile(templatePath, 'utf-8');
+//         const htmlTemplate = ejs.render(templateContent, { Orderdata });
 
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.setContent(htmlTemplate);
-        const pdfBuffer = await page.pdf();
-        await browser.close();
+//         const browser = await puppeteer.launch();
+//         const page = await browser.newPage();
+//         await page.setContent(htmlTemplate);
+//         const pdfBuffer = await page.pdf();
+//         await browser.close();
 
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=sales-report.pdf');
-        res.send(pdfBuffer);
+//         res.setHeader('Content-Type', 'application/pdf');
+//         res.setHeader('Content-Disposition', 'attachment; filename=sales-report.pdf');
+//         res.send(pdfBuffer);
         
-    } catch (error) {
-        console.log(error);
-        res.status(500).render('adminerror' , {message:"500: Internal Server Error...please try after sometime"}); 
-    }
-}
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).render('adminerror' , {message:"500: Internal Server Error...please try after sometime"}); 
+//     }
+// }
 
 
 
@@ -1568,6 +1568,6 @@ module.exports = {
     loadOrders,loadorderEdit,changeOrderStatus,
     acceptRequest,rejectRequest,acceptitemrequest,Rejectitemrequest,
     loadCoupons,addCoupons,loadcouponEdit,updateCoupon,deletecoupon,loadBanner,AddBanner,DeleteBanner,
-    changestatus,loadSales,loadDateReport,fetchDataGraph,downloadSalesReport,loadadminerror
+    changestatus,loadSales,loadDateReport,fetchDataGraph,loadadminerror
     ,searchProductshere,loadcustomreport
 }

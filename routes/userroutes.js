@@ -84,6 +84,6 @@ user_route.get('/errorpage'  , userController.loadErrorPage)
 user_route.get('/servererrorpage' , userController.loadserverErrorPage)
 user_route.post('/postReview',userController.postUserReview)
 user_route.get('/myOrders',userController.loadUserOrders)
-user_route.get('/downloadInvoice',auth.isLogin, userController.downloadInvoice)
+// user_route.get('/downloadInvoice',auth.isLogin, userController.downloadInvoice)
 
 module.exports = user_route
