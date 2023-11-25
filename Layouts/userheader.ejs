@@ -22,7 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
- 
 
 
 /* Styles for the modal */
@@ -204,22 +203,22 @@
                     <!--modal displayed after item added to wishlist -->
 
 
-                    <p class="mobile-promotion">Every Tuesday<span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
+                    <p class="mobile-promotion">Every Tuesday.Big Sale Up to 40%
                     </p>
                     
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 
-                                <a href="shop-wishlist.html">
+                                <a href="/wishlist">
                                     <img alt="Evara" src="assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white" ></span>
+                                    <span class="pro-count white" >0</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="/shopcart">
                                     <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
+                                    <span class="pro-count white">0</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
@@ -241,7 +240,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="#"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                    <a href="#"><img src="/public/admin-assets/imgs/denimstores.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -252,78 +251,56 @@
             </div>
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
-                        <input type="text" placeholder="Search for items…">
-                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    <form action="/search" method="get">
+                        <input type="text" class="search-input" name="query" placeholder="Search...">
+                        <button type="submit"  class="search-button"><i class="fi-rs-search">Search</i></button>
                     </form>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">
-                    <div class="main-categori-wrap mobile-header-border">
-                        <a class="categori-button-active-2" href="#">
-                            <span class="fi-rs-apps"></span> Browse Categories
-                        </a>
-                        <div class="categori-dropdown-wrap categori-dropdown-active-small">
-                            <ul>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-dress"></i>Women's Clothing</a>
-                                </li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-tshirt"></i>Men's Clothing</a>
-                                </li>
-                                <li> <a href="shop-grid-right.html"><i class="evara-font-smartphone"></i> Cellphones</a>
-                                </li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>Computer &
-                                        Office</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-cpu"></i>Consumer
-                                        Electronics</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-home"></i>Home & Garden</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-high-heels"></i>Shoes</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-teddy-bear"></i>Mother &
-                                        Kids</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-kite"></i>Outdoor fun</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-
-
-
+                  
                     <!-- mobile menu start -->
                     <nav>
-                        <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="index.html">Home</a>
-                               
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="shop-grid-right.html">All Categories</a>
-                               
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men</a>
-                                    
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="blog-category-fullwidth.html">Women</a>
+                        <ul>
+                                <%if(userData){%>
+                                <li><a  href="/loginhomepage">Home</a></li>
+                                <%} else {%>
+                                <li><a  href="/">Home</a></li>
+                                <% } %>
+                          
+                            <li><a href="/filter?gender=male">Men</a>
                                 
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">About us</a>
-                               
+                            <li class="position-static"><a href="/filter?gender=female">Women</a>
+                                
                             </li>
-                            
+                            <li>
+                                <a href="/contactus">Contact</a>
+                            </li>
+                            <li>
+                                <a href="/aboutus">About us</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                            <li>
+                                <a href="/userdashboard">Profile</a>
+                            </li>
                         </ul>
                     </nav>
                     <!-- mobile menu end -->
                 </div>
-
-
-
-
+        
+        
+        
+        
                 <div class="mobile-header-info-wrap mobile-header-border">
-
+        
                     <div class="single-mobile-header-info">
-                        <a href="page-login-register.html">Log In / Sign Up </a>
+                        <a href="/login">Log In </a>
+                        <a href="/registration">Sign Up </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#">+91-9061609076</a>
+                        <a href="">+91-9061609076</a>
                     </div>
                 </div>
                 <div class="mobile-social-icon">
@@ -336,4 +313,4 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>

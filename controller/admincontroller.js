@@ -113,6 +113,7 @@ const loadProducts = async (req, res) => {
       const totalProductsCount = await Product.countDocuments({});
       // Fetch products for the current page
       const productData = await Product.find({})
+        .sort({ createdOn: -1 }) 
         .skip((page - 1) * itemsPerPage)
         .limit(itemsPerPage);
   
@@ -184,7 +185,7 @@ const loadCategory = async (req, res) => {
     const itemsPerPage = ITEMS_PER_PAGE;
     try {
         const totalcategoryCount = await Category.countDocuments({});
-        const categoryList = await Category.find({}).skip((page - 1) * itemsPerPage).limit(itemsPerPage);
+        const categoryList = await Category.find({}).sort({ createdOn: -1 }).skip((page - 1) * itemsPerPage).limit(itemsPerPage);
         const totalPages = Math.ceil(totalcategoryCount / itemsPerPage);
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.render('category_products', { categoryList: categoryList,currentPage: page,
@@ -212,7 +213,8 @@ const addCategory = async (req, res) => {
         else {
             const category = new Category({
                 categoryName: newCategory,
-                list: 1
+                list: 1,
+                createdOn:Date.now()
             });
 
             const addSuccess = await category.save();
@@ -491,29 +493,9 @@ const Saveproducts = async (req, res) => {
             images: Images,
             stock: stock,
             list: 1,
-            gender: gender
+            gender: gender,
+            createdOn:Date.now()
         });
-
-        // for (let file of req.files) {
-            
-        //     const randomInteger = Math.floor(Math.random() * 20000001)
-        //     const imageDirectory = path.join(__dirname,"/croppedimages")
-        //     let imgFileName = "cropped" + randomInteger + ".jpg"
-        //     let imagePath = path.join(imageDirectory, imgFileName)
-            
-        //     const croppedImage = await sharp(file.path)
-        //         .resize(1000, 1000, {
-        //             fit: "fill",
-        //         })
-        //         .toFile(imagePath)
-        //     if (croppedImage) {
-        //         let imgObj={
-        //             url:imgFileName
-        //         }
-        //         ProductInstance.images.push(imgObj)
-        //     }
-        // }
-
         const addSuccess = await ProductInstance.save();
         if (addSuccess) {
             console.log("Product added successfully");
@@ -1007,7 +989,7 @@ const loadCoupons = async(req,res)=>{
     try {
         const totalcouponCount = await Coupon.countDocuments({});
         const totalPages = Math.ceil(totalcouponCount / itemsPerPage);
-        const couponData = await Coupon.find({}).skip((page - 1) * itemsPerPage).limit(itemsPerPage);
+        const couponData = await Coupon.find({}).sort({ createdOn: -1 }).skip((page - 1) * itemsPerPage).limit(itemsPerPage);
         res.render('coupons' , {couponData:couponData , currentPage: page,
             totalPages: totalPages})
         
@@ -1035,7 +1017,8 @@ const addCoupons = async(req,res)=>{
             Discription:couponDiscription,
             Expiry:couponexpiry,
             Code:couponcode,
-            Discount:discount
+            Discount:discount,
+            createdOn:Date.now()
         })
 
         const success = await coupon.save();
@@ -1414,55 +1397,55 @@ const fetchDataGraph = async (req, res) => {
 
 
 
-// const downloadSalesReport = async(req,res)=>{
-//     try {
+const downloadSalesReport = async(req,res)=>{
+    try {
 
-//         let Orderdata;
-//         let deliverystatus=req.query.deliverystatus
-//         let query = {}; 
-//         let startdate = req.query.startdate;
-//         let enddate = req.query.enddate;
-//         if (deliverystatus && deliverystatus !== "Show all") {
-//             query.status = deliverystatus;
-//           }
-//           query.status = { $regex: new RegExp(deliverystatus, 'i') };
+        let Orderdata;
+        let deliverystatus=req.query.deliverystatus
+        let query = {}; 
+        let startdate = req.query.startdate;
+        let enddate = req.query.enddate;
+        if (deliverystatus && deliverystatus !== "Show all") {
+            query.status = deliverystatus;
+          }
+          query.status = { $regex: new RegExp(deliverystatus, 'i') };
           
           
-//           if (deliverystatus && deliverystatus === "Show all") {
-//             query = {};
-//           }
-//           if (startdate && enddate) {
-//             query.createdOn = { $gte: new Date(startdate), $lt: new Date(enddate) };
-//           } else if (startdate) {
-//             query.createdOn = { $gte: new Date(startdate) };
-//           } else if (enddate) {
-//             enddate.setDate(enddate.getDate() + 1);
-//             query.createdOn = { $lt: new Date(enddate) };
-//           }
+          if (deliverystatus && deliverystatus === "Show all") {
+            query = {};
+          }
+          if (startdate && enddate) {
+            query.createdOn = { $gte: new Date(startdate), $lt: new Date(enddate) };
+          } else if (startdate) {
+            query.createdOn = { $gte: new Date(startdate) };
+          } else if (enddate) {
+            enddate.setDate(enddate.getDate() + 1);
+            query.createdOn = { $lt: new Date(enddate) };
+          }
 
           
-//         Orderdata = await Order.find(query).populate('customerId');
+        Orderdata = await Order.find(query).populate('customerId');
 
 
-//         const templatePath = './views/admin/downloadsreport.ejs';
-//         const templateContent = await fs.readFile(templatePath, 'utf-8');
-//         const htmlTemplate = ejs.render(templateContent, { Orderdata });
+        const templatePath = './views/admin/downloadsreport.ejs';
+        const templateContent = await fs.readFile(templatePath, 'utf-8');
+        const htmlTemplate = ejs.render(templateContent, { Orderdata });
 
-//         const browser = await puppeteer.launch();
-//         const page = await browser.newPage();
-//         await page.setContent(htmlTemplate);
-//         const pdfBuffer = await page.pdf();
-//         await browser.close();
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(htmlTemplate);
+        const pdfBuffer = await page.pdf();
+        await browser.close();
 
-//         res.setHeader('Content-Type', 'application/pdf');
-//         res.setHeader('Content-Disposition', 'attachment; filename=sales-report.pdf');
-//         res.send(pdfBuffer);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=sales-report.pdf');
+        res.send(pdfBuffer);
         
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).render('adminerror' , {message:"500: Internal Server Error...please try after sometime"}); 
-//     }
-// }
+    } catch (error) {
+        console.log(error);
+        res.status(500).render('adminerror' , {message:"500: Internal Server Error...please try after sometime"}); 
+    }
+}
 
 
 
@@ -1569,5 +1552,5 @@ module.exports = {
     acceptRequest,rejectRequest,acceptitemrequest,Rejectitemrequest,
     loadCoupons,addCoupons,loadcouponEdit,updateCoupon,deletecoupon,loadBanner,AddBanner,DeleteBanner,
     changestatus,loadSales,loadDateReport,fetchDataGraph,loadadminerror
-    ,searchProductshere,loadcustomreport
+    ,searchProductshere,loadcustomreport,downloadSalesReport
 }

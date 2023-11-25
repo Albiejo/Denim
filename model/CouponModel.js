@@ -19,6 +19,9 @@ const couponSchema = new mongoose.Schema({
     Code:{
         type:String
     },
+    createdOn:{
+        type:Date
+    },
     Discount:{
         type:Number
     },

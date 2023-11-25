@@ -10,7 +10,7 @@ const auth = require('../middleware/adminAuth')
 // Set up Multer for handling file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'croppedimages'); // Set the destination folder for uploads
+        cb(null, 'cloud_images'); // Set the destination folder for uploads
     },
     filename: function (req, file, cb) {
         // Generating a unique filename for the uploaded file
@@ -105,7 +105,7 @@ admin_route.post('/salesreport' , adminController.loadcustomreport)
 
 admin_route.post('/filterSales', adminController.loadDateReport)
 admin_route.post('/fetchData/:time' , adminController.fetchDataGraph)
-// admin_route.get('/getreport',auth.isLogin,adminController.downloadSalesReport)
+admin_route.get('/getreport',auth.isLogin,adminController.downloadSalesReport)
 admin_route.get('/error',auth.isLogin,adminController.loadadminerror)
 
 

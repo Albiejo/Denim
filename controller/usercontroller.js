@@ -2347,38 +2347,38 @@ const loadUserOrders = async(req,res)=>{
 
 
 
-// const downloadInvoice = async(req,res)=>{
-//   try {
-//     const id = req.query.id
-//     const order = await Order.findOne({ _id: id });
-//     const addressData = order.Address;
-//     const Orderr = await Order.findOne({ _id: id }).populate(
-//       "Items.productId"
-//     );
+const downloadInvoice = async(req,res)=>{
+  try {
+    const id = req.query.id
+    const order = await Order.findOne({ _id: id });
+    const addressData = order.Address;
+    const Orderr = await Order.findOne({ _id: id }).populate(
+      "Items.productId"
+    );
     
-//     const productData = Orderr.Items.map((item) => {
-//       return item.productId;
-//     });
+    const productData = Orderr.Items.map((item) => {
+      return item.productId;
+    });
 
-//     const templatePath = './views/user/invoice.ejs';
-//     const templateContent = await fs.readFile(templatePath, 'utf-8');
-//     const htmlTemplate = ejs.render(templateContent, { Orderr : Orderr , addressData:addressData , productData:productData ,  items: Orderr.Items });
+    const templatePath = './views/user/invoice.ejs';
+    const templateContent = await fs.readFile(templatePath, 'utf-8');
+    const htmlTemplate = ejs.render(templateContent, { Orderr : Orderr , addressData:addressData , productData:productData ,  items: Orderr.Items });
 
-//      // Generate PDF using Puppeteer
-//      const browser = await puppeteer.launch();
-//      const page = await browser.newPage();
-//      await page.setContent(htmlTemplate);
-//      const pdfBuffer = await page.pdf();
-//      await browser.close();
+     // Generate PDF using Puppeteer
+     const browser = await puppeteer.launch();
+     const page = await browser.newPage();
+     await page.setContent(htmlTemplate);
+     const pdfBuffer = await page.pdf();
+     await browser.close();
 
-//      res.setHeader('Content-Type', 'application/pdf');
-//      res.setHeader('Content-Disposition', `attachment; filename=invoice-${ req.query.id}.pdf`);
-//      res.send(pdfBuffer);
-//   } catch (error) {
-//     console.error('Error generating or sending PDF:', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// }
+     res.setHeader('Content-Type', 'application/pdf');
+     res.setHeader('Content-Disposition', `attachment; filename=invoice-${ req.query.id}.pdf`);
+     res.send(pdfBuffer);
+  } catch (error) {
+    console.error('Error generating or sending PDF:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 
 
@@ -2442,5 +2442,5 @@ module.exports = {
   loadCategoryFilter,
   Removeallitems,
   Addallitemstocart,
-  ClearCart,loadErrorPage,loadserverErrorPage,postUserReview,loadUserOrders
+  ClearCart,loadErrorPage,loadserverErrorPage,postUserReview,loadUserOrders,downloadInvoice
 };

@@ -9,6 +9,9 @@ const categorySchema=mongoose.Schema({
     list:{
         type:Boolean,
         required:true
+    },
+    createdOn:{
+        type:Date
     }
 })
 

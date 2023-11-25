@@ -1,0 +1,81 @@
+<div class="mobile-header-active mobile-header-wrapper-style">
+<div class="mobile-header-wrapper-inner">
+    <div class="mobile-header-top">
+        <div class="mobile-header-logo">
+            <a href="#"><img src="/public/admin-assets/imgs/denimstores.png" alt="logo"></a>
+        </div>
+        <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+            <button class="close-style search-close">
+                <i class="icon-top"></i>
+                <i class="icon-bottom"></i>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-header-content-area">
+        <div class="mobile-search search-style-3 mobile-header-border">
+            <form action="/search" method="get">
+                <input type="text" class="search-input" name="query" placeholder="Search...">
+                <button type="submit"  class="search-button"><i class="fi-rs-search">Search</i></button>
+            </form>
+        </div>
+        <div class="mobile-menu-wrap mobile-header-border">
+            <div class="main-categori-wrap mobile-header-border">
+                <a  href="#">
+                    <span class="fi-rs-apps"></span> Browse Categories
+                </a>
+            </div>
+
+
+
+
+
+            <!-- mobile menu start -->
+            <nav>
+                <ul>
+                        <%if(userData){%>
+                        <li><a  href="/loginhomepage">Home</a></li>
+                        <%} else {%>
+                        <li><a  href="/">Home</a></li>
+                        <% } %>
+                  
+                    <li><a href="/filter?gender=male">Men</a>
+                        
+                    </li>
+                    <li class="position-static"><a href="/filter?gender=female">Women</a>
+                        
+                    </li>
+                    <li>
+                        <a href="/contactus">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/aboutus">About us</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- mobile menu end -->
+        </div>
+
+
+
+
+        <div class="mobile-header-info-wrap mobile-header-border">
+
+            <div class="single-mobile-header-info">
+                <a href="/login">Log In </a>
+                <a href="/registration">Sign Up </a>
+            </div>
+            <div class="single-mobile-header-info">
+                <a href="">+91-9061609076</a>
+            </div>
+        </div>
+        <div class="mobile-social-icon">
+            <h5 class="mb-15 text-grey-4">Follow Us</h5>
+            <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+            <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+            <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+            <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+            <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+        </div>
+    </div>
+</div>
+</div>
