@@ -2,7 +2,6 @@ require('dotenv').config()
 const mongoose=require('mongoose')
 
 mongoose.connect("mongodb+srv://albiejosephs101:FYiPv0bBl88IGOVv@denimstores-db.yjh7hie.mongodb.net/denim_stores?retryWrites=true&w=majority")
-// mongoose.connect('mongodb://127.0.0.1:27017/denim_stores')
 .then(()=>console.log("mongoose connected"))
 
 const express = require("express");
