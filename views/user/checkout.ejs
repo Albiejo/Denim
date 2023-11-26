@@ -477,9 +477,6 @@
             url: "/orderconfirm", // Update the URL to the correct server route
             data: formData,
             success: function(response) {
-                if(response.noaddress){
-                    alert(response.noaddress)
-                }
                 if (response.codsucess) {
                          window.location.href = '/orderconfirmation';
                 }else{

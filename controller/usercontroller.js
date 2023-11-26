@@ -1608,6 +1608,7 @@ const confirmOrderDetails = async (req, res) => {
         payment: "not done",
       });
       const data = await order.save();
+      
       if (data) {
         if (req.body.payment_option === "Cash On Delivery") {
           for (let i = 0; i < items.length; i++) {

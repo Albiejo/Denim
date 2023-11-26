@@ -580,30 +580,12 @@ const UpdateProduct = async (req, res) => {
             category: categorySelect,
             regularPrice: regprice,
             offerPrice: offerprice,
-            images: [],
             images: [...file.images, ...Images],
             stock: stock,
             list: status,
             gender: gender
         }
-        for (let file of req.files) {
-            
-            const randomInteger = Math.floor(Math.random() * 20000001)
-            const imageDirectory = "/croppedimages"
-            let imgFileName = "cropped" + randomInteger + ".jpg"
-            let imagePath = path.join(imageDirectory, imgFileName)
-            const croppedImage = await sharp(file.path)
-                .resize(1000, 1000, {
-                    fit: "fill",
-                })
-                .toFile(imagePath)
-            if (croppedImage) {
-                let imgObj={
-                    url:imgFileName
-                }
-                updateFields.images.push(imgObj)
-            }
-        }
+       
         const addSuccess = await Product.findByIdAndUpdate(
             { _id: req.body.Productid },
             { $set: updateFields },
@@ -735,13 +717,12 @@ const Unblockuser = async (req, res) => {
 //deleting image from edit product page 
 const deleteImage = async (req, res) => {
     try {
-        console.log("inside delete function ");
         const imageid = req.query.imageid;
         const productId = req.query.productId
 
         const update = await Product.updateOne({ _id: productId }, { $pull: { images: { _id: imageid } } });
         if(update){
-            res.redirect(`/admin/editProduct/?id=${productId}`);
+            res.redirect(`/admin/editProduct?id=${productId}`);
         }else{
             console.log(error.message)
             res.status(400).render('adminerror' , {message:"400: Bad request ! try again"}); 

@@ -10,7 +10,6 @@
                 </div>
             </div>
         </div>
-       
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row flex-row-reverse">
@@ -32,6 +31,7 @@
                                             </a>
                                         </div>
                                     </div>
+                                   
                                     <%if(productData[i].stock>0){%>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="sale">SALE</span>
@@ -59,9 +59,11 @@
                                        
                                     </div>
                                     <div class="product-action-1 show ">
-                                        <a aria-label="Add now" class="action-btn addwnow wishlistbuttonoflisting btn btn-primary btn-sm" data-item-id="<%=productData[i]._id%>" id="wishlistbuttonlist">
+                                        <a aria-label="Add now" class="action-btn addwnow wishlistbuttonoflisting" data-item-id="<%=productData[i]._id%>" id="wishlistbuttonlist">
                                                 <i class="fi-rs-heart"></i> Add to Wishlist
                                             </a>
+
+                                       
                                     </div>
                                    
                                 </div>
