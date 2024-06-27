@@ -32,4 +32,4 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(Port,()=>{console.log("server started running...!")})
+app.listen(3001,()=>{console.log("server started running...!")})
