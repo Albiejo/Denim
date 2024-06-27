@@ -16,10 +16,9 @@ const puppeteer = require('puppeteer');
 const fs = require('fs').promises;
 
 var instance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEYID,
-  key_secret:process.env.RAZORPAY_SECRET ,
+  key_id: 'rzp_test_nnrSSwuboC1XAr',
+  key_secret:'R3fvmnidfdK502jNWjbp7L5z' ,
 });
-
 
 
 //pagination
@@ -1625,9 +1624,6 @@ const confirmOrderDetails = async (req, res) => {
             CouponData.customers.push(userid);
             await CouponData.save();
           }
-          console.log(
-            "user selected cash on delivery for order and products deledted from cart"
-          );
           res.json({ codsucess: "order placed" });
         } else {
           generateRazorpay(data.orderId, data.totalAmount).then((response) => {

@@ -6,7 +6,7 @@ mongoose.connect("mongodb+srv://albiejosephs101:FYiPv0bBl88IGOVv@denimstores-db.
 
 const express = require("express");
 const app = express()
-const Port = process.env.port
+const Port = process.env.PORT 
  
 
 

@@ -302,7 +302,7 @@
     $.ajax({
         type: 'POST',
         url: '/admin/updatestatus',
-        data: { _id: id},
+        data: { _id: id}, 
         success: function (response) {
             if (response.success) {
                 const updatedStatus = response.update;
