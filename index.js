@@ -6,7 +6,7 @@ mongoose.connect("mongodb+srv://albiejosephs101:FYiPv0bBl88IGOVv@denimstores-db.
 
 const express = require("express");
 const app = express()
-const Port = process.env.PORT 
+const Port = process.env.PORT || 5000
  
 
 
@@ -32,4 +32,4 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(3001,()=>{console.log("server started running...!")})
+app.listen(Port,()=>{console.log("server started running...!")})
