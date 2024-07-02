@@ -1,7 +1,8 @@
 require('dotenv').config()
 const mongoose=require('mongoose')
-
-mongoose.connect("mongodb+srv://albiejosephs101:FYiPv0bBl88IGOVv@denimstores-db.yjh7hie.mongodb.net/denim_stores?retryWrites=true&w=majority")
+const cron=require("node-cron");
+const url  = process.env.URL
+mongoose.connect(url)
 .then(()=>console.log("mongoose connected"))
 
 const express = require("express");
@@ -32,4 +33,16 @@ app.use((err, req, res, next) => {
 });
 
 
+const SERVER = process.env.SERVER || `http://localhost:${process.env.PORT}`
+
+const start = () => {
+    cron.schedule('* * * * *', () => {
+      axios.get(SERVER)
+       .then(response => console.log('Health check successful'))
+       .catch(error => console.error('Health check failed:', error));
+    });
+}
+
+
 app.listen(Port,()=>{console.log("server started running...!")})
+start();
