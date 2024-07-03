@@ -14,7 +14,7 @@ const Razorpay = require("razorpay");
 const Banner = require("../model/BannerModel");
 const puppeteer = require('puppeteer');
 const fs = require('fs').promises;
-
+const { executablePath } = require('puppeteer');
 var instance = new Razorpay({
   key_id: 'rzp_test_nnrSSwuboC1XAr',
   key_secret:'R3fvmnidfdK502jNWjbp7L5z' ,
@@ -2362,7 +2362,11 @@ const downloadInvoice = async(req,res)=>{
     const htmlTemplate = ejs.render(templateContent, { Orderr : Orderr , addressData:addressData , productData:productData ,  items: Orderr.Items });
 
      // Generate PDF using Puppeteer
-     const browser = await puppeteer.launch();
+     const browser = await puppeteer.launch({
+      headless: 'new',
+      executablePath: executablePath(),
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
      const page = await browser.newPage();
      await page.setContent(htmlTemplate);
      const pdfBuffer = await page.pdf();
