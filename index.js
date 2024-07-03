@@ -2,13 +2,13 @@ require('dotenv').config()
 const mongoose=require('mongoose')
 const cron=require("node-cron");
 const url  = process.env.URL
-mongoose.connect(url)
-.then(()=>console.log("mongoose connected"))
-
 const express = require("express");
 const app = express()
 const Port = process.env.PORT || 5000
- 
+const axios=require("axios")
+
+mongoose.connect(url)
+.then(()=>console.log("mongoose connected"))
 
 
 app.use(express.urlencoded({ extended: true }))
@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 });
 
 
-const SERVER = process.env.SERVER || `http://localhost:${process.env.PORT}`
+const SERVER =`http://localhost:${process.env.PORT}`
 
 const start = () => {
     cron.schedule('* * * * *', () => {
@@ -44,5 +44,5 @@ const start = () => {
 }
 
 
-app.listen(Port,()=>{console.log("server started running...!")})
 start();
+app.listen(Port,()=>{console.log("server started running...!")})
