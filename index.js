@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 });
 
 
-const SERVER =`http://localhost:${process.env.PORT}`
+const SERVER =`https://denim-qw84.onrender.com/`
 
 const start = () => {
     cron.schedule('* * * * *', () => {
